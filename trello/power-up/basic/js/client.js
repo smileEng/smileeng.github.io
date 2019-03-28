@@ -196,6 +196,8 @@ var boardButtonCallback = function (t) {
 var cardButtonUpdateTitle = function (t) {
 
     console.log('Someone clicked the button');
+    debugger;
+    console.log(t);
     //console.log("CardButtonUpdateTitle:", t);
     return;
 

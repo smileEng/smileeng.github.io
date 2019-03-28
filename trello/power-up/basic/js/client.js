@@ -195,7 +195,7 @@ var boardButtonCallback = function (t) {
 
 var cardButtonUpdateTitle = function (t) {
 
-    console.log("CardButtonUpdateTitle:", st);
+    console.log("CardButtonUpdateTitle:", t);
     return;
 
     // In this case we want to attach that park to the card as an attachment
@@ -210,7 +210,7 @@ var cardButtonUpdateTitle = function (t) {
         console.log("Oh no! You don't have permission to add attachments to this card.")
         return t.closePopup(); // We're just going to close the popup for now.
     }
-    ;
+
 
 }
 

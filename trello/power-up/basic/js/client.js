@@ -195,7 +195,8 @@ var boardButtonCallback = function (t) {
 
 var cardButtonUpdateTitle = function (t) {
 
-    console.log("CardButtonUpdateTitle:", t);
+    console.log('Someone clicked the button');
+    //console.log("CardButtonUpdateTitle:", t);
     return;
 
     // In this case we want to attach that park to the card as an attachment
@@ -358,7 +359,7 @@ TrelloPowerUp.initialize({
             // usually you will provide a callback function to be run on button click
             // we recommend that you use a popup on click generally
             icon: GRAY_ICON, // don't use a colored icon here
-            text: 'Open Popup',
+            text: 'Update Title',
             callback: cardButtonUpdateTitle
         }, {
             // usually you will provide a callback function to be run on button click

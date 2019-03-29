@@ -206,7 +206,7 @@ var cardButtonUpdateTitle = async function (t) {
         const labels = await HELPER.board.getLabels(t, {board: id});
         const members = await HELPER.board.getMembers(t, {board: id});
         console.log("Booard", board,
-            "members: ", member,
+            "members: ", members,
             "List: ", lists,
             "Labels: ", labels);
     }

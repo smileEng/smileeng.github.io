@@ -15,7 +15,7 @@ const helper = function ({key}) {
 
 
     async function getMyBoards(t) {
-        const url = `${baseUrl}members/me/boards?${await getAuthQS(t)}`;
+        const url = `${baseUrl}members/me/boards?${await getAuthQS(t)}&filter=open%2Cstarred`;
         const results = await $.get(url);
         return results;
     }

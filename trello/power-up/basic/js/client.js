@@ -224,15 +224,15 @@ var cardButtonUpdateTitle = function (t) {
     async function doMagic(t) {
         console.log("let the magic beginds");
 
-        const {card} = HELPER.getContext(t)
-        const cardName = HELPER.card.getName(t, {card});
+        const {card} = await HELPER.getContext(t)
+        const cardName = await HELPER.card.getName(t, {card});
         const newCardName = cardName + " 1";
         await HELPER.card.updateName(t, {card, name: newCardName});
 
         // const {card} = await t.getContext();
         // const token = await t.get('member', 'private', 'token');
         //
-        console.log("MAGIC COMPLETED", card, token);
+        console.log("MAGIC COMPLETED!");
     }
 
     // Promise

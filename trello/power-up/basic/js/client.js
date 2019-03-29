@@ -196,7 +196,13 @@ var boardButtonCallback = function (t) {
 var cardButtonUpdateTitle = function (t) {
 
     console.log('Someone clicked the button', t);
-    return t.card('all')
+
+    t.card("5c9d5f99ec537c0c25a197ac", "name")
+        .then(function (c) {
+            console.log("THIS IS MY CARD NAME>", c)
+        })
+
+    t.card('all')
         .then(function (card) {
             console.log(JSON.stringify(card, null, 2));
         })

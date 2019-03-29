@@ -49,6 +49,11 @@ const helper = function ({key}) {
     async function updateCardName(t, {card, name}) {
 
         //dueComplete: false
+        //due
+
+        //For moving
+        //idBoard
+        //idList
         const url = `${baseUrl}cards/${card}?${await getAuthQS(t)}&name=${name}&due=2019-03-29T14:30:00`;
         const result = await $.ajax({url, type: 'PUT'});
         return 1;

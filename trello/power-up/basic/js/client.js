@@ -198,18 +198,21 @@ var boardButtonCallback = function (t) {
 var cardButtonUpdateTitle = async function (t) {
 
     const boards = await HELPER.my.getBoards(t);
+
+    const results = await t.getAll();
+
     console.log("Boards:", boards)
-    for (const index in boards) {
-        const board = boards[index];
-        const {id} = board;
-        const lists = await HELPER.board.getLists(t, {board: id});
-        const labels = await HELPER.board.getLabels(t, {board: id});
-        const members = await HELPER.board.getMembers(t, {board: id});
-        console.log("Booard", board,
-            "members: ", members,
-            "List: ", lists,
-            "Labels: ", labels);
-    }
+    // for (const index in boards) {
+    //     const board = boards[index];
+    //     const {id} = board;
+    //     const lists = await HELPER.board.getLists(t, {board: id});
+    //     const labels = await HELPER.board.getLabels(t, {board: id});
+    //     const members = await HELPER.board.getMembers(t, {board: id});
+    //     console.log("Booard", board,
+    //         "members: ", members,
+    //         "List: ", lists,
+    //         "Labels: ", labels);
+    // }
 
 
     console.log("let the magic beginds");

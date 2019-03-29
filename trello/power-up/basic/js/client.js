@@ -219,7 +219,7 @@ var cardButtonUpdateTitle = function (t) {
     Promise
         .all([
             t.getContext(),
-            t.getRestApi().getToken()
+            t.get('member', 'private', 'token')
         ])
         .then(function ([context, token]) {
             const {card} = context;

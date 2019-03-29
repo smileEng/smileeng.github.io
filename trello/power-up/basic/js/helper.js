@@ -13,6 +13,14 @@ const helper = function ({key}) {
         return t.getContext();
     }
 
+
+    async function getBoards(t){
+
+        //get a list of boards of this given users.
+        //get a list of list base on the boards.
+
+    }
+
     async function getBoardMembers(t, {board}) {
         const url = `${baseUrl}boards/${board}/members?${await getAuthQS(t)}`;
         const results = await $.get(url);
@@ -35,13 +43,19 @@ const helper = function ({key}) {
     }
 
     async function addMemberToCard(t, {card, member}) {
-        const url = `${baseUrl}cards/${card}/idMembers?${await getAuthQS(t)}&value=${member}`;
-        const result = await $.ajax({url, type: 'POST'});
-        return 1;
+        try{
+            const url = `${baseUrl}cards/${card}/idMembers?${await getAuthQS(t)}&value=${member}`;
+            const result = await $.ajax({url, type: 'POST'});
+            return 1;
+        }catch(e){
+            //if added will also throw error. LMFAO
+            console.error(e)
+            return 0;
+        }
     }
 
     async function removeMemberToCard(t, {card, member}) {
-        const url = `${baseUrl}cards/${card}/idMembers?${await getAuthQS(t)}&value=${member}`;
+        const url = `${baseUrl}cards/${card}/idMembers/${member}?${await getAuthQS(t)}`;
         const result = await $.ajax({url, type: 'DELETE'});
         return 1;
     }

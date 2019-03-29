@@ -200,21 +200,28 @@ var cardButtonUpdateTitle = async function (t) {
     const boards = await HELPER.my.getBoards(t);
     console.log("Boards:", boards)
     for (const board in boards) {
-        console.log("MY BOARD:", board);
+        const {id} = board;
+        const lists = await HELPER.board.getLists(t, {board: id});
+        const labels = await HELPER.board.getLabels(t, {board: id});
+        const members = await HELPER.board.getMembers(t, {board: id});
+        console.log("Booard", board,
+            "members: ", member,
+            "List: ", lists,
+            "Labels: ", labels);
     }
 
 
-    console.log("let the magic beginds");
-    const {board, card} = await HELPER.getContext(t)
-    const cardName = await HELPER.card.getName(t, {card});
-    const members = await HELPER.board.getMembers(t, {board});
-    const newCardName = cardName + " 1";
-    await HELPER.card.updateName(t, {card, name: newCardName});
-    await HELPER.card.addMember(t, {card, member: "54a94d03ad9dfede1a13f59f"});
-    await HELPER.card.removeMember(t, {card, member: "534a0cf75530fa95323f352c"});
-
-    console.log("MAGIC COMPLETED!");
-    console.log("Members: ", members);
+    // console.log("let the magic beginds");
+    // const {board, card} = await HELPER.getContext(t)
+    // const cardName = await HELPER.card.getName(t, {card});
+    // const members = await HELPER.board.getMembers(t, {board});
+    // const newCardName = cardName + " 1";
+    // await HELPER.card.updateName(t, {card, name: newCardName});
+    // await HELPER.card.addMember(t, {card, member: "54a94d03ad9dfede1a13f59f"});
+    // await HELPER.card.removeMember(t, {card, member: "534a0cf75530fa95323f352c"});
+    //
+    // console.log("MAGIC COMPLETED!");
+    // console.log("Members: ", members);
 
     return;
 

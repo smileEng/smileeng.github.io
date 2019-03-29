@@ -197,12 +197,26 @@ var cardButtonUpdateTitle = function (t) {
 
     console.log('Someone clicked the button', t);
 
-    var a = t.card("5c9d52075e297845f60a3a69", "name");
-    console.log("ANOTHER CARD?", a);
-    t.card("5c9d52075e297845f60a3a69", "name")
-        .then(function (c) {
-            console.log("THIS IS MY CARD NAME>", c)
-        })
+    // var a = t.card("5c9d52075e297845f60a3a69", "name");
+    // console.log("ANOTHER CARD?", a);
+    // t.card("5c9d52075e297845f60a3a69", "name")
+    //     .then(function (c) {
+    //         console.log("THIS IS MY CARD NAME>", c)
+    //     })
+    //
+
+    t.getRestApi()
+        .getToken()
+        .then(function (token) {
+            if (!token) {
+                console.log("YOURE NOT AUTH")
+            } else {
+                console.log("Getting list of members")
+                const url = `https://api.trello.com/1/members/me/boards?` +
+                    `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
+                $.get(url);
+            }
+        });
 
     // t.card('all')
     //     .then(function (card) {
@@ -465,7 +479,7 @@ TrelloPowerUp.initialize({
 
         // If we want to ask the user to authorize our Power-Up to make full use of the Trello API
         // you'll need to add your API from trello.com/app-key below:
-        let trelloAPIKey = '';
+        let trelloAPIKey = '9ed85a487eb0b08bff2f11e84cc80c16';
         // This key will be used to generate a token that you can pass along with the API key to Trello's
         // RESTful API. Using the key/token pair, you can make requests on behalf of the authorized user.
 
@@ -481,6 +495,9 @@ TrelloPowerUp.initialize({
             console.log("🙈 Looks like you need to add your API key to the project!");
         }
     }
+}, {
+    appKey: '9ed85a487eb0b08bff2f11e84cc80c16',
+    appName: 'My own power up'
 });
 
 console.log('Loaded by: ' + document.referrer);

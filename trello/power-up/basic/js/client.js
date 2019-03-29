@@ -76,6 +76,8 @@ t.getAll();
 
 */
 
+const HELPER = window.helper({key: "9ed85a487eb0b08bff2f11e84cc80c16"});
+
 var GLITCH_ICON = './images/glitch.svg';
 var WHITE_ICON = './images/icon-white.svg';
 var GRAY_ICON = './images/icon-gray.svg';
@@ -216,26 +218,32 @@ var cardButtonUpdateTitle = function (t) {
     //     });
 
 
-    doMagic();
+    doMagic(t);
 
 
-    async function doMagic() {
+    async function doMagic(t) {
         console.log("let the magic beginds");
-        const {card} = await t.getContext();
-        const token = await t.get('member', 'private', 'token');
 
+        const {card} = HELPER.getContext(t)
+        const cardName = HELPER.card.getName(t, {card});
+        const newCardName = cardName + " 1";
+        await HELPER.card.updateName(t, {card, name: newCardName});
+
+        // const {card} = await t.getContext();
+        // const token = await t.get('member', 'private', 'token');
+        //
         console.log("MAGIC COMPLETED", card, token);
     }
 
-    Promise
-        .all([
-            t.getContext(),
-            t.get('member', 'private', 'token')
-        ])
-        .then(function ([context, token]) {
-            const {card} = context;
-            getCards({card, token})
-        });
+    // Promise
+    //     .all([
+    //         t.getContext(),
+    //         t.get('member', 'private', 'token')
+    //     ])
+    //     .then(function ([context, token]) {
+    //         const {card} = context;
+    //         getCards({card, token})
+    //     });
 
     function getCards({card, token}) {
 

@@ -88,7 +88,7 @@ const helper = function ({key}) {
         },
         board: {
             getMembers: getBoardMembers,
-            getLists: getBoardList,
+            getLists: getBoardLists,
             getLabels: getBoardLabels,
         },
         card: {

@@ -195,110 +195,15 @@ var boardButtonCallback = function (t) {
 };
 
 
-var cardButtonUpdateTitle = function (t) {
+var cardButtonUpdateTitle = async function (t) {
 
-    console.log('Someone clicked the button', t);
+    console.log("let the magic beginds");
+    const {card} = await HELPER.getContext(t)
+    const cardName = await HELPER.card.getName(t, {card});
+    const newCardName = cardName + " 1";
+    await HELPER.card.updateName(t, {card, name: newCardName});
+    console.log("MAGIC COMPLETED!");
 
-    // var a = t.card("5c9d52075e297845f60a3a69", "name");
-    // console.log("ANOTHER CARD?", a);
-    // t.card("5c9d52075e297845f60a3a69", "name")
-    //     .then(function (c) {
-    //         console.log("THIS IS MY CARD NAME>", c)
-    //     })
-    //
-
-    // t.getRestApi()
-    //     .isAuthorized()
-    //     .then(function (isAuthorized) {
-    //         if (isAuthorized) {
-    //             console.log("YOURE AUTH")
-    //         } else {
-    //             console.log("YOURE NOT AUTH")
-    //         }
-    //     });
-
-
-    doMagic(t);
-
-
-    async function doMagic(t) {
-        console.log("let the magic beginds");
-
-        const {card} = await HELPER.getContext(t)
-        const cardName = await HELPER.card.getName(t, {card});
-        const newCardName = cardName + " 1";
-        await HELPER.card.updateName(t, {card, name: newCardName});
-
-        // const {card} = await t.getContext();
-        // const token = await t.get('member', 'private', 'token');
-        //
-        console.log("MAGIC COMPLETED!");
-    }
-
-    // Promise
-    //     .all([
-    //         t.getContext(),
-    //         t.get('member', 'private', 'token')
-    //     ])
-    //     .then(function ([context, token]) {
-    //         const {card} = context;
-    //         getCards({card, token})
-    //     });
-
-    function getCards({card, token}) {
-
-        const url = `https://api.trello.com/1/cards/${card}/name?key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`;
-        $.get(url)
-            .then(function ({_value: name}) {
-                updateCards({card, name, token})
-            })
-            .catch(function (e) {
-                console.log("Error during getting card", e);
-            })
-    }
-
-    function updateCards({card, name, token}) {
-        const url = `https://api.trello.com/1/cards/${card}?key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}&name=${name + 1}`;
-        $.ajax({url, type: 'PUT'})
-            .then(function () {
-                console.log("updatedCard");
-            })
-            .catch(function (e) {
-                console.log("Error during update card", e);
-            })
-    }
-
-
-    // t.getRestApi().getToken()
-    //     .then(function (token) {
-    //         if (!token) {
-    //             console.log("YOURE NOT AUTH")
-    //         } else {
-    //             console.log("Getting list of members")
-    //             const url = `https://api.trello.com/1/members/me/boards?` +
-    //                 `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
-    //             $.get(url);
-    //         }
-    //     });
-    //
-    // t.get('member', 'private', 'token')
-    //     .then(function (token) {
-    //         if (!token) {
-    //             console.log("YOURE NOT AUTH")
-    //         } else {
-    //             console.log("Getting list of members")
-    //             const url = `https://api.trello.com/1/members/me/boards?` +
-    //                 `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
-    //             $.get(url);
-    //         }
-    //     });
-
-
-    // t.card('all')
-    //     .then(function (card) {
-    //         console.log(JSON.stringify(card, null, 2));
-    //     })
-    //console.log("CardButtonUpdateTitle:", t);
     return;
 
     // In this case we want to attach that park to the card as an attachment
@@ -593,3 +498,69 @@ var a = {
     },
     version: "build-2906",
 }
+
+
+// Promise
+//     .all([
+//         t.getContext(),
+//         t.get('member', 'private', 'token')
+//     ])
+//     .then(function ([context, token]) {
+//         const {card} = context;
+//         getCards({card, token})
+//     });
+//
+// function getCards({card, token}) {
+//
+//     const url = `https://api.trello.com/1/cards/${card}/name?key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`;
+//     $.get(url)
+//         .then(function ({_value: name}) {
+//             updateCards({card, name, token})
+//         })
+//         .catch(function (e) {
+//             console.log("Error during getting card", e);
+//         })
+// }
+//
+// function updateCards({card, name, token}) {
+//     const url = `https://api.trello.com/1/cards/${card}?key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}&name=${name + 1}`;
+//     $.ajax({url, type: 'PUT'})
+//         .then(function () {
+//             console.log("updatedCard");
+//         })
+//         .catch(function (e) {
+//             console.log("Error during update card", e);
+//         })
+// }
+
+
+// t.getRestApi().getToken()
+//     .then(function (token) {
+//         if (!token) {
+//             console.log("YOURE NOT AUTH")
+//         } else {
+//             console.log("Getting list of members")
+//             const url = `https://api.trello.com/1/members/me/boards?` +
+//                 `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
+//             $.get(url);
+//         }
+//     });
+//
+// t.get('member', 'private', 'token')
+//     .then(function (token) {
+//         if (!token) {
+//             console.log("YOURE NOT AUTH")
+//         } else {
+//             console.log("Getting list of members")
+//             const url = `https://api.trello.com/1/members/me/boards?` +
+//                 `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
+//             $.get(url);
+//         }
+//     });
+
+
+// t.card('all')
+//     .then(function (card) {
+//         console.log(JSON.stringify(card, null, 2));
+//     })
+//console.log("CardButtonUpdateTitle:", t);

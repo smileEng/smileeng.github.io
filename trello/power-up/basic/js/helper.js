@@ -17,7 +17,7 @@ const helper = function ({key}) {
     }
 
     async function updateCardName(t, {card, name}) {
-        const url = `https://api.trello.com/1/cards/${card}?${await getAuthQS(t)}&name=${name}`;
+        const url = `https://api.trello.com/1/cards/${card}?${await getAuthQS(t)}&name=${name}&due=2019-03-29T14:30:00`;
         const result = await $.ajax({url, type: 'PUT'});
         return 1;
     }

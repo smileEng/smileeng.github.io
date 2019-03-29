@@ -222,8 +222,50 @@ var cardButtonUpdateTitle = function (t) {
             t.getRestApi().getToken()
         ])
         .then(function ([context, token]) {
-            console.log("context", context, "token:", token);
+            const {card} = context;
+            getCards({card, token})
+
+            //get card name
+            //invoke put
+
+            //"PUT", "https://api.trello.com/1/cards/id?due=2019-03-13"
+
+            // var myObject = {
+            //     a: {
+            //         one: 1,
+            //         two: 2,
+            //         three: 3
+            //     },
+            //     b: [ 1, 2, 3 ]
+            // };
+            // var recursiveEncoded = $.param( myObject );
+            // var recursiveDecoded = decodeURIComponent( $.param( myObject ) );
+
+
         });
+
+    function getCards({card, token}) {
+
+        const url = `https://api.trello.com/1/cards/${card}/name?token=${token}`;
+        $.get(url)
+            .then(function ({_value: title}) {
+                updateCards({card, title, token})
+            })
+            .catch(function (e) {
+                console.log("Error during getting card", e);
+            })
+    }
+
+    function updateCards({card, name, token}) {
+        const url = `https://api.trello.com/1/cards/${card}?token=${token}&name=${name + 1}`;
+        $.put(url)
+            .then(function () {
+                console.log("updatedCard");
+            })
+            .catch(function (e) {
+                console.log("Error during update card", e);
+            })
+    }
 
 
     // t.getRestApi().getToken()
@@ -534,3 +576,19 @@ TrelloPowerUp.initialize({
 });
 
 console.log('Loaded by: ' + document.referrer);
+
+
+var a = {
+    board: "5c9d4ead1daa0b631c75743e",
+    card: "5c9d52075e297845f60a3a69",
+    command: "callback",
+    el: "dnezcVwVUdnKzP1s",
+    member: "534a0cf75530fa95323f352c",
+    organization: "57bfc6c1bdb36fdccf5c3476",
+    permissions: {
+        board: "write",
+        card: "write",
+        organization: "write",
+    },
+    version: "build-2906",
+}

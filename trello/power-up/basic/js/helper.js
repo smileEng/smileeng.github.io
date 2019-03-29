@@ -66,9 +66,14 @@ const helper = function ({key}) {
         }
     }
     async function removeMemberToCard(t, {card, member}) {
-        const url = `${baseUrl}cards/${card}/idMembers/${member}?${await getAuthQS(t)}`;
-        const result = await $.ajax({url, type: 'DELETE'});
-        return 1;
+        try{
+            const url = `${baseUrl}cards/${card}/idMembers/${member}?${await getAuthQS(t)}`;
+            const result = await $.ajax({url, type: 'DELETE'});
+            return 1;
+        }catch(e){
+            console.error(e);
+            return 0;
+        }
     }
 
 
@@ -84,15 +89,17 @@ const helper = function ({key}) {
         }
     }
     async function removeLabelToCard(t, {card, label}) {
-        const url = `${baseUrl}cards/${card}/idLabels/${label}?${await getAuthQS(t)}`;
-        const result = await $.ajax({url, type: 'DELETE'});
-        return 1;
+        try{
+            const url = `${baseUrl}cards/${card}/idLabels/${label}?${await getAuthQS(t)}`;
+            const result = await $.ajax({url, type: 'DELETE'});
+            return 1;
+        }catch(e){
+            console.error(e)
+            return 0;
+        }
     }
 
-
-
     //2019-03-30T16:00:00.000Z
-
     async function getAuthQS(t) {
         const token = await t.get('member', 'private', 'token');
         return `key=${key}&token=${token}`

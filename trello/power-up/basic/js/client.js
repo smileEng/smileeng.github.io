@@ -205,41 +205,50 @@ var cardButtonUpdateTitle = function (t) {
     //     })
     //
 
-    t.getRestApi()
-        .isAuthorized()
-        .then(function (isAuthorized) {
-            if (isAuthorized) {
-                console.log("YOURE AUTH")
-            } else {
-                console.log("YOURE NOT AUTH")
-            }
+    // t.getRestApi()
+    //     .isAuthorized()
+    //     .then(function (isAuthorized) {
+    //         if (isAuthorized) {
+    //             console.log("YOURE AUTH")
+    //         } else {
+    //             console.log("YOURE NOT AUTH")
+    //         }
+    //     });
+
+
+    Promise
+        .all([
+            t.getContext(),
+            t.getRestApi().getToken()
+        ])
+        .then(function ([context, token]) {
+            console.log("context", context, "token:", token);
         });
 
 
-    t.getRestApi()
-        .getToken()
-        .then(function (token) {
-            if (!token) {
-                console.log("YOURE NOT AUTH")
-            } else {
-                console.log("Getting list of members")
-                const url = `https://api.trello.com/1/members/me/boards?` +
-                    `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
-                $.get(url);
-            }
-        });
-
-    t.get('member', 'private', 'token')
-        .then(function (token) {
-            if (!token) {
-                console.log("YOURE NOT AUTH")
-            } else {
-                console.log("Getting list of members")
-                const url = `https://api.trello.com/1/members/me/boards?` +
-                    `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
-                $.get(url);
-            }
-        });
+    // t.getRestApi().getToken()
+    //     .then(function (token) {
+    //         if (!token) {
+    //             console.log("YOURE NOT AUTH")
+    //         } else {
+    //             console.log("Getting list of members")
+    //             const url = `https://api.trello.com/1/members/me/boards?` +
+    //                 `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
+    //             $.get(url);
+    //         }
+    //     });
+    //
+    // t.get('member', 'private', 'token')
+    //     .then(function (token) {
+    //         if (!token) {
+    //             console.log("YOURE NOT AUTH")
+    //         } else {
+    //             console.log("Getting list of members")
+    //             const url = `https://api.trello.com/1/members/me/boards?` +
+    //                 `key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`
+    //             $.get(url);
+    //         }
+    //     });
 
 
     // t.card('all')

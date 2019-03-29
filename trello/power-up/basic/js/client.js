@@ -196,13 +196,15 @@ var boardButtonCallback = function (t) {
 
 
 var cardButtonUpdateTitle = async function (t) {
-
     console.log("let the magic beginds");
-    const {card} = await HELPER.getContext(t)
+    const {board, card} = await HELPER.getContext(t)
     const cardName = await HELPER.card.getName(t, {card});
+    const members = await HELPER.board.getMembers(t, {board});
     const newCardName = cardName + " 1";
     await HELPER.card.updateName(t, {card, name: newCardName});
+
     console.log("MAGIC COMPLETED!");
+    console.log("Members: ", members);
 
     return;
 

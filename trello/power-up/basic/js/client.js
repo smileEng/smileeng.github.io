@@ -258,7 +258,7 @@ var cardButtonUpdateTitle = function (t) {
 
     function updateCards({card, name, token}) {
         const url = `https://api.trello.com/1/cards/${card}?key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}&name=${name + 1}`;
-        $.put(url)
+        $.ajax({url, type: 'PUT'})
             .then(function () {
                 console.log("updatedCard");
             })

@@ -197,6 +197,8 @@ var cardButtonUpdateTitle = function (t) {
 
     console.log('Someone clicked the button', t);
 
+    var a = t.card("5c9d52075e297845f60a3a69", "name");
+    console.log("ANOTHER CARD?", a);
     t.card("5c9d52075e297845f60a3a69", "name")
         .then(function (c) {
             console.log("THIS IS MY CARD NAME>", c)

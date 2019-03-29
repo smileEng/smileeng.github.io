@@ -216,6 +216,17 @@ var cardButtonUpdateTitle = function (t) {
     //     });
 
 
+    doMagic();
+
+
+    async function doMagic() {
+        console.log("let the magic beginds");
+        const {card} = await t.getContext();
+        const token = await t.get('member', 'private', 'token');
+
+        console.log("MAGIC COMPLETED", card, token);
+    }
+
     Promise
         .all([
             t.getContext(),
@@ -224,32 +235,14 @@ var cardButtonUpdateTitle = function (t) {
         .then(function ([context, token]) {
             const {card} = context;
             getCards({card, token})
-
-            //get card name
-            //invoke put
-
-            //"PUT", "https://api.trello.com/1/cards/id?due=2019-03-13"
-
-            // var myObject = {
-            //     a: {
-            //         one: 1,
-            //         two: 2,
-            //         three: 3
-            //     },
-            //     b: [ 1, 2, 3 ]
-            // };
-            // var recursiveEncoded = $.param( myObject );
-            // var recursiveDecoded = decodeURIComponent( $.param( myObject ) );
-
-
         });
 
     function getCards({card, token}) {
 
         const url = `https://api.trello.com/1/cards/${card}/name?key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`;
         $.get(url)
-            .then(function ({_value: title}) {
-                updateCards({card, title, token})
+            .then(function ({_value: name}) {
+                updateCards({card, name, token})
             })
             .catch(function (e) {
                 console.log("Error during getting card", e);

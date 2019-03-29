@@ -246,7 +246,7 @@ var cardButtonUpdateTitle = function (t) {
 
     function getCards({card, token}) {
 
-        const url = `https://api.trello.com/1/cards/${card}/name?token=${token}`;
+        const url = `https://api.trello.com/1/cards/${card}/name?key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}`;
         $.get(url)
             .then(function ({_value: title}) {
                 updateCards({card, title, token})
@@ -257,7 +257,7 @@ var cardButtonUpdateTitle = function (t) {
     }
 
     function updateCards({card, name, token}) {
-        const url = `https://api.trello.com/1/cards/${card}?token=${token}&name=${name + 1}`;
+        const url = `https://api.trello.com/1/cards/${card}?key=9ed85a487eb0b08bff2f11e84cc80c16&token=${token}&name=${name + 1}`;
         $.put(url)
             .then(function () {
                 console.log("updatedCard");

@@ -36,3 +36,5 @@ const helper = function ({key}) {
         }
     }
 };
+
+window.helper = helper;

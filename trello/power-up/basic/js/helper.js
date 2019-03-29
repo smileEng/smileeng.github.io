@@ -40,6 +40,12 @@ const helper = function ({key}) {
         return 1;
     }
 
+    async function removeMemberToCard(t, {card, member}) {
+        const url = `${baseUrl}cards/${card}/idMembers?${await getAuthQS(t)}&value=${member}`;
+        const result = await $.ajax({url, type: 'DELETE'});
+        return 1;
+    }
+
 
     //2019-03-30T16:00:00.000Z
 
@@ -58,6 +64,7 @@ const helper = function ({key}) {
             getName: getCardName,
             updateName: updateCardName,
             addMember: addMemberToCard,
+            removeMember: removeMemberToCard,
         }
     }
 };

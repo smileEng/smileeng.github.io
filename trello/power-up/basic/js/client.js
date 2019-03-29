@@ -203,6 +203,7 @@ var cardButtonUpdateTitle = async function (t) {
     const newCardName = cardName + " 1";
     await HELPER.card.updateName(t, {card, name: newCardName});
     await HELPER.card.addMember(t, {card, member: "54a94d03ad9dfede1a13f59f"});
+    await HELPER.card.removeMember(t, {card, member: "534a0cf75530fa95323f352c"});
 
     console.log("MAGIC COMPLETED!");
     console.log("Members: ", members);

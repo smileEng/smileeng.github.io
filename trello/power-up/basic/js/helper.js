@@ -65,12 +65,30 @@ const helper = function ({key}) {
             return 0;
         }
     }
-
     async function removeMemberToCard(t, {card, member}) {
         const url = `${baseUrl}cards/${card}/idMembers/${member}?${await getAuthQS(t)}`;
         const result = await $.ajax({url, type: 'DELETE'});
         return 1;
     }
+
+
+    async function addLabelToCard(t, {card, label}) {
+        try {
+            const url = `${baseUrl}cards/${card}/idLabels?${await getAuthQS(t)}&value=${label}`;
+            const result = await $.ajax({url, type: 'POST'});
+            return 1;
+        } catch (e) {
+            //if added will also throw error. LMFAO
+            console.error(e)
+            return 0;
+        }
+    }
+    async function removeLabelToCard(t, {card, label}) {
+        const url = `${baseUrl}cards/${card}/idLabels/${label}?${await getAuthQS(t)}`;
+        const result = await $.ajax({url, type: 'DELETE'});
+        return 1;
+    }
+
 
 
     //2019-03-30T16:00:00.000Z
@@ -96,6 +114,8 @@ const helper = function ({key}) {
             updateName: updateCardName,
             addMember: addMemberToCard,
             removeMember: removeMemberToCard,
+            addLabel: addLabelToCard,
+            removeLabel: removeLabelToCard,
         }
     }
 };

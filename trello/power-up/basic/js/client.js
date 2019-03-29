@@ -197,15 +197,15 @@ var cardButtonUpdateTitle = function (t) {
 
     console.log('Someone clicked the button', t);
 
-    t.card("5c9d5f99ec537c0c25a197ac", "name")
+    t.card("5c9d52075e297845f60a3a69", "name")
         .then(function (c) {
             console.log("THIS IS MY CARD NAME>", c)
         })
 
-    t.card('all')
-        .then(function (card) {
-            console.log(JSON.stringify(card, null, 2));
-        })
+    // t.card('all')
+    //     .then(function (card) {
+    //         console.log(JSON.stringify(card, null, 2));
+    //     })
     //console.log("CardButtonUpdateTitle:", t);
     return;
 

@@ -206,6 +206,17 @@ var cardButtonUpdateTitle = function (t) {
     //
 
     t.getRestApi()
+        .isAuthorized()
+        .then(function (isAuthorized) {
+            if (isAuthorized) {
+                console.log("YOURE AUTH")
+            } else {
+                console.log("YOURE NOT AUTH")
+            }
+        });
+
+
+    t.getRestApi()
         .getToken()
         .then(function (token) {
             if (!token) {

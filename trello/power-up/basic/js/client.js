@@ -196,6 +196,14 @@ var boardButtonCallback = function (t) {
 
 
 var cardButtonUpdateTitle = async function (t) {
+
+    const boards = await HELPER.my.getBoards(t);
+    console.log("Boards:", boards)
+    for (const board in boards) {
+        console.log("MY BOARD:", board);
+    }
+
+
     console.log("let the magic beginds");
     const {board, card} = await HELPER.getContext(t)
     const cardName = await HELPER.card.getName(t, {card});

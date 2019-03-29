@@ -14,12 +14,24 @@ const helper = function ({key}) {
     }
 
 
-    async function getBoards(t){
-
-        //get a list of boards of this given users.
-        //get a list of list base on the boards.
-
+    async function getMyBoards(t) {
+        const url = `${baseUrl}members/me/boards?${await getAuthQS(t)}`;
+        const results = await $.get(url);
+        return results;
     }
+
+    async function getBoardLists(t, {board}) {
+        const url = `${baseUrl}boards/${board}/lists?${await getAuthQS(t)}`;
+        const results = await $.get(url);
+        return results;
+    }
+
+    async function getBoardLabels(t, {board}) {
+        const url = `${baseUrl}boards/${board}/labels?${await getAuthQS(t)}`;
+        const results = await $.get(url);
+        return results;
+    }
+
 
     async function getBoardMembers(t, {board}) {
         const url = `${baseUrl}boards/${board}/members?${await getAuthQS(t)}`;
@@ -43,11 +55,11 @@ const helper = function ({key}) {
     }
 
     async function addMemberToCard(t, {card, member}) {
-        try{
+        try {
             const url = `${baseUrl}cards/${card}/idMembers?${await getAuthQS(t)}&value=${member}`;
             const result = await $.ajax({url, type: 'POST'});
             return 1;
-        }catch(e){
+        } catch (e) {
             //if added will also throw error. LMFAO
             console.error(e)
             return 0;
@@ -71,8 +83,13 @@ const helper = function ({key}) {
 
     return {
         getContext,
+        my: {
+            getBoards: getMyBoards
+        },
         board: {
-            getMembers: getBoardMembers
+            getMembers: getBoardMembers,
+            getLists: getBoardList,
+            getLabels: getBoardLabels,
         },
         card: {
             getName: getCardName,

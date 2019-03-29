@@ -202,6 +202,7 @@ var cardButtonUpdateTitle = async function (t) {
     const members = await HELPER.board.getMembers(t, {board});
     const newCardName = cardName + " 1";
     await HELPER.card.updateName(t, {card, name: newCardName});
+    await HELPER.card.addMember(t, {card, member: "54a94d03ad9dfede1a13f59f"});
 
     console.log("MAGIC COMPLETED!");
     console.log("Members: ", members);

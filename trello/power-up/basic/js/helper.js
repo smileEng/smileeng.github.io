@@ -56,7 +56,8 @@ const helper = function ({key}) {
         },
         card: {
             getName: getCardName,
-            updateName: updateCardName
+            updateName: updateCardName,
+            addMember: addMemberToCard,
         }
     }
 };

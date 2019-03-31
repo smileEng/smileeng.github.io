@@ -9,63 +9,6 @@ var GLITCH_ICON = './images/glitch.svg';
 var WHITE_ICON = './images/icon-white.svg';
 var GRAY_ICON = './images/icon-gray.svg';
 
-var randomBadgeColor = function () {
-    return ['green', 'yellow', 'red', 'none'][Math.floor(Math.random() * 4)];
-};
-
-var getBadges = function (t) {
-    return t.card('name')
-        .get('name')
-        .then(function (cardName) {
-            console.log('We just loaded the card name for fun: ' + cardName);
-
-            return [{
-                // dynamic badges can have their function rerun after a set number
-                // of seconds defined by refresh. Minimum of 10 seconds.
-                dynamic: function () {
-                    // we could also return a Promise that resolves to this as well if we needed to do something async first
-                    return {
-                        title: 'Detail Badge', // for detail badges only
-                        text: 'Dynamic ' + (Math.random() * 100).toFixed(0).toString(),
-                        icon: GRAY_ICON, // for card front badges only
-                        color: randomBadgeColor(),
-                        refresh: 10 // in seconds
-                    };
-                }
-            }, {
-                // its best to use static badges unless you need your badges to refresh
-                // you can mix and match between static and dynamic
-                title: 'Detail Badge', // for detail badges only
-                text: 'Static',
-                icon: GRAY_ICON, // for card front badges only
-                color: null
-            }, {
-                // card detail badges (those that appear on the back of cards)
-                // also support callback functions so that you can open for example
-                // open a popup on click
-                title: 'Popup Detail Badge', // for detail badges only
-                text: 'Popup',
-                icon: GRAY_ICON, // for card front badges only
-                callback: function (context) { // function to run on click
-                    return context.popup({
-                        title: 'Card Detail Badge Popup',
-                        url: './settings.html',
-                        height: 184 // we can always resize later, but if we know the size in advance, its good to tell Trello
-                    });
-                }
-            }, {
-                // or for simpler use cases you can also provide a url
-                // when the user clicks on the card detail badge they will
-                // go to a new tab at that url
-                title: 'URL Detail Badge', // for detail badges only
-                text: 'URL',
-                icon: GRAY_ICON, // for card front badges only
-                url: 'https://trello.com/home',
-                target: 'Trello Landing Page' // optional target for above url
-            }];
-        });
-};
-
 var boardButtonCallback = function (t) {
     return t.popup({
         title: 'Popup List Example',
@@ -121,8 +64,7 @@ var boardButtonCallback = function (t) {
     });
 };
 
-
-var cardButtonUpdateTitle = async function (t) {
+const trelloBoardDetailsPrintout = async function (t) {
 
     const boards = await HELPER.my.getBoards(t);
     const {board, card} = await HELPER.getContext(t)
@@ -186,6 +128,7 @@ const updateCardStatus = async function (t, {
     lbla: labelAdd = [],
     lbl: labels = [],
     lstu: listMove = '',
+    brdu: boardMove = '',
     archive: isArchive = false,
     dateRelative: dueDateRelativeMinutes = 0,
 }) {
@@ -196,116 +139,22 @@ const updateCardStatus = async function (t, {
 
     let cardConfig = {};
 
-    if (listMove) {
+    if (listMove)
         cardConfig["idList"] = listMove;
-    }
-
-    if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0) {
+    if (boardMove)
+        cardConfig["idBoard"] = boardMove;
+    if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0)
         cardConfig["due"] = moment().add("minutes", dueDateRelativeMinutes).toISOString();
-    }
-
-    if (labels.length > 0){
+    if (labels.length > 0)
         cardConfig["idLabels"] = labels.join();
+    if (isArchive)
+        cardConfig["closed"] = true
 
-    }
-
-    if (Object.keys(cardConfig).length > 0){
+    if (Object.keys(cardConfig).length > 0) {
         await HELPER.card.update(t, {card, ...cardConfig});
     }
-
-    // const newCardName = cardName + " 1";
-    // await HELPER.card.updateName(t, {card, name: newCardName});
-    // await HELPER.card.addMember(t, {card, member: "54a94d03ad9dfede1a13f59f"});
-    // await HELPER.card.removeMember(t, {card, member: "534a0cf75530fa95323f352c"});
-
-    // for (const labelDeleteIndex in labelDelete) {
-    //     await HELPER.card.removeLabel(t, {card, label: labelDelete[labelDeleteIndex]});
-    // }
-    //
-    // for (const labelAddIndex in labelAdd) {
-    //     await HELPER.card.addLabel(t, {card, label: labelAdd[labelAddIndex]});
-    // }
-
-
-//     lbld: ["5ca07e044584ae0c876bf606", "5c9d4ead91d0c2ddc50e7bb6"],
-//         lbla: ["5ca07f13a3c8b947fcc3311d"],
-//         achive: true,
-//         dateRelative: 180
-// })
-// }  lbld: ["5ca07e044584ae0c876bf606"],
-//     lbla: ["5c9d4ead91d0c2ddc50e7bb6"],
-//     lstu: "5c9df8cc90f4dd50c0666271",
-//     dateRelative: 180
-
-
-//moment(startdate).add(2, 'hours')
-    //remove labels : "5ca07e044584ae0c876bf606"
-    //assign labels : "5c9d4ead91d0c2ddc50e7bb6"
-    //add due date - relative to hours now
-    //move to list/boards : "5c9df8cc90f4dd50c0666271"
-
-
 }
 
-
-var cardButtonCallback = function (t) {
-    // Trello Power-Up Popups are actually pretty powerful
-    // Searching is a pretty common use case, so why reinvent the wheel
-    var items = ['acad', 'arch', 'badl', 'crla', 'grca', 'yell', 'yose'].map(function (parkCode) {
-        var urlForCode = 'http://www.nps.gov/' + parkCode + '/';
-        var nameForCode = '🏞 ' + parkCode.toUpperCase();
-        return {
-            text: nameForCode,
-            url: urlForCode,
-            callback: function (t) {
-                // In this case we want to attach that park to the card as an attachment
-                // but first let's ensure that the user can write on this model
-                if (t.memberCanWriteToModel('card')) {
-                    return t.attach({url: urlForCode, name: nameForCode})
-                        .then(function () {
-                            // once that has completed we should tidy up and close the popup
-                            return t.closePopup();
-                        });
-                } else {
-                    console.log("Oh no! You don't have permission to add attachments to this card.")
-                    return t.closePopup(); // We're just going to close the popup for now.
-                }
-                ;
-            }
-        };
-    });
-
-    // we could provide a standard iframe popup, but in this case we
-    // will let Trello do the heavy lifting
-    return t.popup({
-        title: 'Popup Search Example',
-        items: items, // Trello will search client-side based on the text property of the items
-        search: {
-            count: 5, // How many items to display at a time
-            placeholder: 'Search National Parks',
-            empty: 'No parks found'
-        }
-    });
-
-    // in the above case we let Trello do the searching client side
-    // but what if we don't have all the information up front?
-    // no worries, instead of giving Trello an array of `items` you can give it a function instead
-    /*
-    return t.popup({
-      title: 'Popup Async Search',
-      items: function(t, options) {
-        // use options.search which is the search text entered so far
-        // and return a Promise that resolves to an array of items
-        // similar to the items you provided in the client side version above
-      },
-      search: {
-        placeholder: 'Start typing your search',
-        empty: 'Huh, nothing there',
-        searching: 'Scouring the internet...'
-      }
-    });
-    */
-};
 
 // We need to call initialize to get all of our capability handles set up and registered with Trello
 TrelloPowerUp.initialize({
@@ -346,28 +195,7 @@ TrelloPowerUp.initialize({
             return [];
         }
     },
-    'attachment-thumbnail': function (t, options) {
-        // options.url has the url of the attachment for us
-        // return an object (or a Promise that resolves to it) with some or all of these properties:
-        // url, title, image, modified (Date), created (Date), createdBy, modifiedBy
 
-        // You should use this if you have useful information about an attached URL but it
-        // doesn't warrant pulling it out into a section via the attachment-sections capability
-        // for example if you just want to show a preview image and give it a better name
-        // then attachment-thumbnail is the best option
-        return {
-            url: options.url,
-            title: '👉 ' + options.url + ' 👈',
-            image: {
-                url: GLITCH_ICON,
-                logo: true // false if you are using a thumbnail of the content
-            },
-        };
-
-        // if we don't actually have any valuable information about the url
-        // we can let Trello know like so:
-        // throw t.NotHandled();
-    },
     'board-buttons': function (t, options) {
         return [{
             // we can either provide a button that has a callback function
@@ -388,12 +216,12 @@ TrelloPowerUp.initialize({
         return getBadges(t);
     },
     'card-buttons': function (t, options) {
-
-
-        //remove labels : "5ca07e044584ae0c876bf606"
-        //assign labels : "5c9d4ead91d0c2ddc50e7bb6"
-        //add due date - relative to hours now
-        //move to list/boards : "5c9df8cc90f4dd50c0666271"
+        // return new Promise(function (resolve) {
+        //     resolve({
+        //         name: '💻 ' + options.url + ' 🤔',
+        //         desc: 'This Power-Up knows cool things about the attached url'
+        //     });
+        // });
 
         return [
             {
@@ -429,49 +257,9 @@ TrelloPowerUp.initialize({
                     })
                 }
             }]
-
-
-        return [{
-            // usually you will provide a callback function to be run on button click
-            // we recommend that you use a popup on click generally
-            icon: GRAY_ICON, // don't use a colored icon here
-            text: 'Update Title',
-            callback: cardButtonUpdateTitle
-        }, {
-            // usually you will provide a callback function to be run on button click
-            // we recommend that you use a popup on click generally
-            icon: GRAY_ICON, // don't use a colored icon here
-            text: 'Open Popup',
-            callback: cardButtonCallback
-        }, {
-            // but of course, you could also just kick off to a url if that's your thing
-            icon: GRAY_ICON,
-            text: 'Just a URL',
-            url: 'https://developers.trello.com',
-            target: 'Trello Developer Site' // optional target for above url
-        }];
     },
-    'card-detail-badges': function (t, options) {
-        return getBadges(t);
-    },
-    'card-from-url': function (t, options) {
-        // options.url has the url in question
-        // if we know cool things about that url we can give Trello a name and desc
-        // to use when creating a card. Trello will also automatically add that url
-        // as an attachment to the created card
-        // As always you can return a Promise that resolves to the card details
 
-        return new Promise(function (resolve) {
-            resolve({
-                name: '💻 ' + options.url + ' 🤔',
-                desc: 'This Power-Up knows cool things about the attached url'
-            });
-        });
 
-        // if we don't actually have any valuable information about the url
-        // we can let Trello know like so:
-        // throw t.NotHandled();
-    },
     'format-url': function (t, options) {
         // options.url has the url that we are being asked to format
         // in our response we can include an icon as well as the replacement text
@@ -485,6 +273,7 @@ TrelloPowerUp.initialize({
         // we can let Trello know like so:
         // throw t.NotHandled();
     },
+
     'show-settings': function (t, options) {
         // when a user clicks the gear icon by your Power-Up in the Power-Ups menu
         // what should Trello show. We highly recommend the popup in this case as

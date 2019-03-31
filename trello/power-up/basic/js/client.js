@@ -184,6 +184,7 @@ var cardButtonUpdateTitle = async function (t) {
 const updateCardStatus = async function (t, {
     lbld: labelDelete = [],
     lbla: labelAdd = [],
+    lbl: labels = [],
     lstu: listMove = '',
     archive: isArchive = false,
     dateRelative: dueDateRelativeMinutes = 0,
@@ -203,6 +204,11 @@ const updateCardStatus = async function (t, {
         cardConfig["due"] = moment().add("minutes", dueDateRelativeMinutes).toISOString();
     }
 
+    if (labels.length > 0){
+        cardConfig["idLabels"] = labels.join();
+
+    }
+
     if (Object.keys(cardConfig).length > 0){
         await HELPER.card.update(t, {card, ...cardConfig});
     }
@@ -212,13 +218,13 @@ const updateCardStatus = async function (t, {
     // await HELPER.card.addMember(t, {card, member: "54a94d03ad9dfede1a13f59f"});
     // await HELPER.card.removeMember(t, {card, member: "534a0cf75530fa95323f352c"});
 
-    for (const labelDeleteIndex in labelDelete) {
-        await HELPER.card.removeLabel(t, {card, label: labelDelete[labelDeleteIndex]});
-    }
-
-    for (const labelAddIndex in labelAdd) {
-        await HELPER.card.addLabel(t, {card, label: labelAdd[labelAddIndex]});
-    }
+    // for (const labelDeleteIndex in labelDelete) {
+    //     await HELPER.card.removeLabel(t, {card, label: labelDelete[labelDeleteIndex]});
+    // }
+    //
+    // for (const labelAddIndex in labelAdd) {
+    //     await HELPER.card.addLabel(t, {card, label: labelAdd[labelAddIndex]});
+    // }
 
 
 //     lbld: ["5ca07e044584ae0c876bf606", "5c9d4ead91d0c2ddc50e7bb6"],
@@ -395,8 +401,7 @@ TrelloPowerUp.initialize({
                 text: "Working on it-1hr",
                 callback: function (t) {
                     return updateCardStatus(t, {
-                        lbld: ["5ca07e044584ae0c876bf606"],
-                        lbla: ["5c9d4ead91d0c2ddc50e7bb6"],
+                        lbl: ["5c9d4ead91d0c2ddc50e7bb6"],
                         lstu: "5c9df8cc90f4dd50c0666271",
                         dateRelative: 60
                     })
@@ -407,8 +412,7 @@ TrelloPowerUp.initialize({
                 text: "Working on it-3hr",
                 callback: function (t) {
                     return updateCardStatus(t, {
-                        lbld: ["5ca07e044584ae0c876bf606"],
-                        lbla: ["5c9d4ead91d0c2ddc50e7bb6"],
+                        lbl: ["5c9d4ead91d0c2ddc50e7bb6"],
                         lstu: "5c9df8cc90f4dd50c0666271",
                         dateRelative: 180
                     })
@@ -419,8 +423,7 @@ TrelloPowerUp.initialize({
                 text: "zCompleted",
                 callback: function (t) {
                     return updateCardStatus(t, {
-                        lbld: ["5ca07e044584ae0c876bf606", "5c9d4ead91d0c2ddc50e7bb6"],
-                        lbla: ["5ca07f13a3c8b947fcc3311d"],
+                        lbl: ["5ca07f13a3c8b947fcc3311d"],
                         archive: true,
                         dateRelative: 180
                     })

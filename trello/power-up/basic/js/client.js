@@ -216,47 +216,32 @@ TrelloPowerUp.initialize({
         return getBadges(t);
     },
     'card-buttons': function (t, options) {
-        // return new Promise(function (resolve) {
-        //     resolve({
-        //         name: '💻 ' + options.url + ' 🤔',
-        //         desc: 'This Power-Up knows cool things about the attached url'
-        //     });
-        // });
+        return new Promise(async function (resolve) {
+            try {
+                const jsonUrl = await t.get('board', 'private', 'jsonUrl');
+                const cardButtonsJsonPath = `${jsonUrl}\card-buttons.json`;
+                const cardButtonConfig = $.get(cardButtonsJsonPath);
+                const cardButtons = cardButtonConfig["card-buttons"]
+                    .map(function (icon, text, ...parameters) {
+                        return {
+                            icon,
+                            text,
+                            callback: function (t) {
+                                return updateCardStatus(t, parameters)
+                            }
+                        };
+                    })
+                return cardButtons;
+            } catch (e) {
+                console.error("An error has occured while trying to load json");
+            }
 
-        return [
-            {
-                icon: "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
-                text: "Working on it-1hr",
-                callback: function (t) {
-                    return updateCardStatus(t, {
-                        lbl: ["5c9d4ead91d0c2ddc50e7bb6"],
-                        lstu: "5c9df8cc90f4dd50c0666271",
-                        dateRelative: 60
-                    })
-                }
-            },
-            {
-                icon: "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
-                text: "Working on it-3hr",
-                callback: function (t) {
-                    return updateCardStatus(t, {
-                        lbl: ["5c9d4ead91d0c2ddc50e7bb6"],
-                        lstu: "5c9df8cc90f4dd50c0666271",
-                        dateRelative: 180
-                    })
-                }
-            },
-            {
-                icon: "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
-                text: "zCompleted",
-                callback: function (t) {
-                    return updateCardStatus(t, {
-                        lbl: ["5ca07f13a3c8b947fcc3311d"],
-                        archive: true,
-                        dateRelative: 180
-                    })
-                }
-            }]
+
+            resolve({
+                name: '💻 ' + options.url + ' 🤔',
+                desc: 'This Power-Up knows cool things about the attached url'
+            });
+        });
     },
 
 

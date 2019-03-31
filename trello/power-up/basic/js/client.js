@@ -219,7 +219,7 @@ TrelloPowerUp.initialize({
         return new Promise(async function (resolve) {
             try {
                 const jsonUrl = await t.get('board', 'private', 'jsonUrl');
-                const cardButtonsJsonPath = `${jsonUrl}\card-buttons.json`;
+                const cardButtonsJsonPath = `${jsonUrl}/card-buttons.json`;
                 const cardButtonConfig = $.get(cardButtonsJsonPath);
                 const cardButtons = cardButtonConfig["card-buttons"]
                     .map(function (icon, text, ...parameters) {

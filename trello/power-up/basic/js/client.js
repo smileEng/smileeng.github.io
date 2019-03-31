@@ -130,7 +130,7 @@ var cardButtonUpdateTitle = async function (t) {
     const results = await t.getAll();
 
     console.log("Boards:", boards)
-    const boardsIWant = boards.filter(function(d){
+    const boardsIWant = boards.filter(function (d) {
         return d.id == board;
     })
 
@@ -160,8 +160,6 @@ var cardButtonUpdateTitle = async function (t) {
     await HELPER.card.removeLabel(t, {card, label: "534a0cf75530fa95323f352c"});
 
 
-
-
     console.log("MAGIC COMPLETED!");
     console.log("Members: ", members);
 
@@ -183,16 +181,65 @@ var cardButtonUpdateTitle = async function (t) {
 
 }
 
-var updateCardStatus = async function(t, config){
+const updateCardStatus = async function (t, {
+    lbld: labelDelete = [],
+    lbla: labelAdd = [],
+    lstu: listMove = '',
+    archive: isArchive = false,
+    dateRelative: dueDateRelativeMinutes = 0,
+}) {
 
-    //remove labels
-    //assign labels
+    const {board, card} = await HELPER.getContext(t)
+    const cardName = await HELPER.card.getName(t, {card});
+    const members = await HELPER.board.getMembers(t, {board});
+
+    let cardConfig = {};
+
+    if (listMove) {
+        cardConfig["idList"] = listMove;
+    }
+
+    if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0) {
+        cardConfig["due"] = moment().add("minutes", dueDateRelativeMinutes).toISOString();
+    }
+
+    if (Object.keys(cardConfig).length > 0){
+        await HELPER.card.update(t, {card, ...cardConfig});
+    }
+
+    // const newCardName = cardName + " 1";
+    // await HELPER.card.updateName(t, {card, name: newCardName});
+    // await HELPER.card.addMember(t, {card, member: "54a94d03ad9dfede1a13f59f"});
+    // await HELPER.card.removeMember(t, {card, member: "534a0cf75530fa95323f352c"});
+
+    for (const labelDeleteIndex in labelDelete) {
+        await HELPER.card.removeLabel(t, {card, label: labelDelete[labelDeleteIndex]});
+    }
+
+    for (const labelAddIndex in labelAdd) {
+        await HELPER.card.addLabel(t, {card, label: labelAdd[labelAddIndex]});
+    }
+
+
+//     lbld: ["5ca07e044584ae0c876bf606", "5c9d4ead91d0c2ddc50e7bb6"],
+//         lbla: ["5ca07f13a3c8b947fcc3311d"],
+//         achive: true,
+//         dateRelative: 180
+// })
+// }  lbld: ["5ca07e044584ae0c876bf606"],
+//     lbla: ["5c9d4ead91d0c2ddc50e7bb6"],
+//     lstu: "5c9df8cc90f4dd50c0666271",
+//     dateRelative: 180
+
+
+//moment(startdate).add(2, 'hours')
+    //remove labels : "5ca07e044584ae0c876bf606"
+    //assign labels : "5c9d4ead91d0c2ddc50e7bb6"
     //add due date - relative to hours now
-    //move to list/boards
+    //move to list/boards : "5c9df8cc90f4dd50c0666271"
 
 
 }
-
 
 
 var cardButtonCallback = function (t) {
@@ -335,6 +382,52 @@ TrelloPowerUp.initialize({
         return getBadges(t);
     },
     'card-buttons': function (t, options) {
+
+
+        //remove labels : "5ca07e044584ae0c876bf606"
+        //assign labels : "5c9d4ead91d0c2ddc50e7bb6"
+        //add due date - relative to hours now
+        //move to list/boards : "5c9df8cc90f4dd50c0666271"
+
+        return [
+            {
+                icon: "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
+                text: "Working on it-1hr",
+                callback: function (t) {
+                    return updateCardStatus(t, {
+                        lbld: ["5ca07e044584ae0c876bf606"],
+                        lbla: ["5c9d4ead91d0c2ddc50e7bb6"],
+                        lstu: "5c9df8cc90f4dd50c0666271",
+                        dateRelative: 60
+                    })
+                }
+            },
+            {
+                icon: "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
+                text: "Working on it-3hr",
+                callback: function (t) {
+                    return updateCardStatus(t, {
+                        lbld: ["5ca07e044584ae0c876bf606"],
+                        lbla: ["5c9d4ead91d0c2ddc50e7bb6"],
+                        lstu: "5c9df8cc90f4dd50c0666271",
+                        dateRelative: 180
+                    })
+                }
+            },
+            {
+                icon: "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+                text: "zCompleted",
+                callback: function (t) {
+                    return updateCardStatus(t, {
+                        lbld: ["5ca07e044584ae0c876bf606", "5c9d4ead91d0c2ddc50e7bb6"],
+                        lbla: ["5ca07f13a3c8b947fcc3311d"],
+                        archive: true,
+                        dateRelative: 180
+                    })
+                }
+            }]
+
+
         return [{
             // usually you will provide a callback function to be run on button click
             // we recommend that you use a popup on click generally
@@ -399,7 +492,7 @@ TrelloPowerUp.initialize({
             height: 184 // we can always resize later, but if we know the size in advance, its good to tell Trello
         });
     },
-
+    /*
     /*
 
         🔑 Authorization Capabiltiies 🗝

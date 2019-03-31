@@ -46,7 +46,10 @@ const helper = function ({key}) {
         return name;
     }
 
-    async function updateCardName(t, {card, name}) {
+    async function updateCardConfig(t, {
+        card,
+        ...configs
+    }) {
 
         //dueComplete: false
         //due
@@ -54,7 +57,11 @@ const helper = function ({key}) {
         //For moving
         //idBoard
         //idList
-        const url = `${baseUrl}cards/${card}?${await getAuthQS(t)}&name=${name}&due=2019-03-29T14:30:00`;
+        //&name=${name}&due=2019-03-29T14:30:00
+
+        const queryStirng = decodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
+        const url = `${baseUrl}cards/${card}?${queryStirng}`;
+        console.log("UDATE CARD Config URL: "+ queryStirng)
         const result = await $.ajax({url, type: 'PUT'});
         return 1;
     }
@@ -70,12 +77,13 @@ const helper = function ({key}) {
             return 0;
         }
     }
+
     async function removeMemberToCard(t, {card, member}) {
-        try{
+        try {
             const url = `${baseUrl}cards/${card}/idMembers/${member}?${await getAuthQS(t)}`;
             const result = await $.ajax({url, type: 'DELETE'});
             return 1;
-        }catch(e){
+        } catch (e) {
             console.error(e);
             return 0;
         }
@@ -93,12 +101,13 @@ const helper = function ({key}) {
             return 0;
         }
     }
+
     async function removeLabelToCard(t, {card, label}) {
-        try{
+        try {
             const url = `${baseUrl}cards/${card}/idLabels/${label}?${await getAuthQS(t)}`;
             const result = await $.ajax({url, type: 'DELETE'});
             return 1;
-        }catch(e){
+        } catch (e) {
             console.error(e)
             return 0;
         }
@@ -108,6 +117,11 @@ const helper = function ({key}) {
     async function getAuthQS(t) {
         const token = await t.get('member', 'private', 'token');
         return `key=${key}&token=${token}`
+    }
+
+    async function getAuthQSObject(t) {
+        const token = await t.get('member', 'private', 'token');
+        return {key, token};
     }
 
 
@@ -123,7 +137,7 @@ const helper = function ({key}) {
         },
         card: {
             getName: getCardName,
-            updateName: updateCardName,
+            update: updateCardConfig,
             addMember: addMemberToCard,
             removeMember: removeMemberToCard,
             addLabel: addLabelToCard,

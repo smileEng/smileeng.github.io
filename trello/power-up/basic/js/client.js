@@ -135,7 +135,7 @@ var cardButtonUpdateTitle = async function (t) {
     })
 
     for (const index in boardsIWant) {
-        const board = boards[index];
+        const board = boardsIWant[index];
         const {id} = board;
         const lists = await HELPER.board.getLists(t, {board: id});
         const labels = await HELPER.board.getLabels(t, {board: id});
@@ -182,6 +182,18 @@ var cardButtonUpdateTitle = async function (t) {
 
 
 }
+
+var updateCardStatus = async function(t, config){
+
+    //remove labels
+    //assign labels
+    //add due date - relative to hours now
+    //move to list/boards
+
+
+}
+
+
 
 var cardButtonCallback = function (t) {
     // Trello Power-Up Popups are actually pretty powerful

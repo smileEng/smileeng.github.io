@@ -215,28 +215,31 @@ TrelloPowerUp.initialize({
     'card-badges': function (t, options) {
         return getBadges(t);
     },
-    'card-buttons': function (t, options) {
-        return new Promise(async function (resolve) {
+    'card-buttons': async function (t, options) {
+        // return new Promise(async function (resolve) {
             try {
                 const jsonUrl = await t.get('board', 'private', 'jsonUrl');
                 const cardButtonsJsonPath = `${jsonUrl}/card-buttons.json`;
                 const cardButtonConfig = await $.get(cardButtonsJsonPath);
-                const cardButtons = cardButtonConfig["card-buttons"]
-                    .map(function (icon, text, ...parameters) {
-                        return {
-                            icon,
-                            text,
-                            callback: function (t) {
-                                return updateCardStatus(t, parameters)
-                            }
-                        };
-                    })
+                const cardButtons =
+                    cardButtonConfig["card-buttons"]
+                        .map(function (icon, text, ...parameters) {
+                            return {
+                                icon,
+                                text,
+                                callback: function (t) {
+                                    return updateCardStatus(t, parameters)
+                                }
+                            };
+                        })
 
-                resolve(cardButtons);
+                // resolve(cardButtons);
+                return cardButtons;
             } catch (e) {
                 console.error("An error has occured while trying to load json");
+                return [];
             }
-        });
+        // });
     },
 
 

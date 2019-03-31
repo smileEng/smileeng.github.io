@@ -231,16 +231,11 @@ TrelloPowerUp.initialize({
                             }
                         };
                     })
-                return cardButtons;
+
+                resolve(cardButtons);
             } catch (e) {
                 console.error("An error has occured while trying to load json");
             }
-
-
-            resolve({
-                name: '💻 ' + options.url + ' 🤔',
-                desc: 'This Power-Up knows cool things about the attached url'
-            });
         });
     },
 

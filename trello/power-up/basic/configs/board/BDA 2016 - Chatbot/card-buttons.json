@@ -9,6 +9,7 @@
       "dayRelative": 2,
       "prefix": "HRBOT - ",
       "time": "18:00",
+      "pos": "bottom",
       "lstnu": "To Do"
     },
     {
@@ -19,6 +20,7 @@
       ],
       "prefix": "8CBOT - ",
       "time": "18:00",
+      "pos": "bottom",
       "lstnu": "To Do"
     },
     {
@@ -26,6 +28,7 @@
       "text": "zCompleted",
       "mmbd": true,
       "complete": true,
+      "pos": "top",
       "lstnu": "Completed"
     }
   ]

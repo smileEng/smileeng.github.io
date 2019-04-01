@@ -86,6 +86,7 @@ const updateCardStatus = async function (t, {
     dateRelative: dueDateRelativeMinutes = 0,
     dayRelative: dueDateRelativeDay = 0,
     time: dueTime = 0,
+    pos = ""
 
 }) {
 
@@ -151,6 +152,9 @@ const updateCardStatus = async function (t, {
 
     if (boardMove)
         cardConfig["idBoard"] = boardMove;
+
+    if (pos)
+        cardConfig["pos"] = pos;
 
     //Card Config due date computations [minute, day, and time fix setter]
     if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0)

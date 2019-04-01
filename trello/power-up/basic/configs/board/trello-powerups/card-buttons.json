@@ -1,10 +1,34 @@
 {
   "card-buttons": [
     {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "Completed",
+      "mmbd": true,
+      "complete": true,
+      "listnu": "Completed"
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
+      "text": "HRBOT-Task",
+      "mmb": ["54a94d03ad9dfede1a13f59f"],
+      "dayRelative": 2,
+      "prefix" : "HRBOT - ",
+      "time": "18:00",
+      "listnu": "To Do"
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
+      "text": "8CBOT-Task",
+      "mmb": ["552a6e398c4bd76261bf4db9"],
+      "prefix" : "8CBOT - ",
+      "time": "18:00",
+      "listnu": "To Do"
+    },
+    {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
       "text": "Perform by Name - Completed",
-      "lbln" : [
-          "Completed"
+      "lbln": [
+        "Completed"
       ],
       "lstnu": "Completed",
       "complete": true
@@ -30,7 +54,6 @@
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
       "text": "zCompleted",
-
       "lbl": [
         "5ca07f13a3c8b947fcc3311d"
       ],

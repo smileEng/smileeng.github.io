@@ -61,7 +61,7 @@ const helper = function ({key}) {
 
         const queryStirng = decodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
         const url = `${baseUrl}cards/${card}?${queryStirng}`;
-        console.log("UDATE CARD Config URL: "+ queryStirng)
+        console.log("UDATE CARD Config URL: " + queryStirng)
         const result = await $.ajax({url, type: 'PUT'});
         return 1;
     }
@@ -82,6 +82,25 @@ const helper = function ({key}) {
         try {
             const url = `${baseUrl}cards/${card}/idMembers/${member}?${await getAuthQS(t)}`;
             const result = await $.ajax({url, type: 'DELETE'});
+            return 1;
+        } catch (e) {
+            console.error(e);
+            return 0;
+        }
+    }
+
+    async function removeAllMembersFromCard(t, {card}) {
+        try {
+
+            const authQS = await getAuthQS(t);
+            const memberUrls = `${baseUrl}cards/${card}/idMembers?${authQS}`;
+            const members = await $.get(memberUrls);
+            for (let index in members) {
+                const member = members[index].id;
+                const url = `${baseUrl}cards/${card}/idMembers/${member}?${authQS}`;
+                const result = await $.ajax({url, type: 'DELETE'});
+            }
+
             return 1;
         } catch (e) {
             console.error(e);
@@ -140,6 +159,7 @@ const helper = function ({key}) {
             update: updateCardConfig,
             addMember: addMemberToCard,
             removeMember: removeMemberToCard,
+            removeAllMembers: removeAllMembersFromCard,
             addLabel: addLabelToCard,
             removeLabel: removeLabelToCard,
         }

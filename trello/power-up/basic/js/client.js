@@ -70,6 +70,7 @@ const trelloBoardDetailsPrintout = async function (t) {
 }
 
 const updateCardStatus = async function (t, {
+    prefix: cardTitlePrefix = "",
     lbld: labelDelete = [],
     lbla: labelAdd = [],
     lbl: labels = [],
@@ -77,9 +78,13 @@ const updateCardStatus = async function (t, {
     lstu: listMove = '',
     lstnu: listMoveByName = '',
     brdu: boardMove = '',
+    mmb: members = [],
+    mmbd: memberDeleteAll = false,
     archive: isArchive = false,
     complete: isComplete = false,
     dateRelative: dueDateRelativeMinutes = 0,
+    dayRelative: dueDateRelativeDay = 0,
+    time: dueTime = 0,
 }) {
     const {board, card} = await HELPER.getContext(t)
     const cardName = await HELPER.card.getName(t, {card});
@@ -124,6 +129,17 @@ const updateCardStatus = async function (t, {
 
     if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0)
         cardConfig["due"] = moment().add("minutes", dueDateRelativeMinutes).toISOString();
+    if (dueDateRelativeDay && dueDateRelativeDay !== 0) {
+        const dueConfig = cardConfig["due"] ? moment(cardConfig["due"]) : moment();
+        cardConfig["due"] = dueConfig.add("days", dueDateRelativeDay).toISOString();
+    }
+
+    if (dueTime && dueTime !== 0) {
+        const [hour, minute] = dueTime.split(":")
+        const dueConfig = cardConfig["due"] ? moment(cardConfig["due"]) : moment();
+        dueConfig.set({hour: parseInt(hour), minute: parseInt(minute)})
+        cardConfig["due"] = dueConfig.toISOString();
+    }
 
     if (labelNameByIds.length > 0 || labels.length > 0)
         cardConfig["idLabels"] =
@@ -134,7 +150,14 @@ const updateCardStatus = async function (t, {
     if (isArchive)
         cardConfig["closed"] = true
 
+    if (memberDeleteAll)
+        cardConfig["idMembers"] = [];
+
+    if (mmb.length > 0)
+        cardConfig["idMembers"] = mmb;
+
     cardConfig["dueComplete"] = true
+
     if (Object.keys(cardConfig).length > 0) {
         await HELPER.card.update(t, {card, ...cardConfig});
     }

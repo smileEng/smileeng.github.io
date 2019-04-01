@@ -95,7 +95,7 @@ const updateCardStatus = async function (t, {
             })
 
         if (foundList)
-            listMoveByNameId = foundList.name;
+            listMoveByNameId = foundList.id;
     }
 
     let labelNameByIds = [];

@@ -21,10 +21,12 @@
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
       "text": "zCompleted",
+
       "lbl": [
         "5ca07f13a3c8b947fcc3311d"
       ],
       "archive": true,
+      "complete": true,
       "dateRelative": 180
     }
   ]

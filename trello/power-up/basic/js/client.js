@@ -66,59 +66,6 @@ var boardButtonCallback = function (t) {
 
 const trelloBoardDetailsPrintout = async function (t) {
 
-    const boards = await HELPER.my.getBoards(t);
-    const {board, card} = await HELPER.getContext(t)
-
-    const results = await t.getAll();
-
-    console.log("Boards:", boards)
-    const boardsIWant = boards.filter(function (d) {
-        return d.id == board;
-    })
-
-    for (const index in boardsIWant) {
-        const board = boardsIWant[index];
-        const {id} = board;
-        const lists = await HELPER.board.getLists(t, {board: id});
-        const labels = await HELPER.board.getLabels(t, {board: id});
-        const members = await HELPER.board.getMembers(t, {board: id});
-        console.log("Booard", board,
-            "members: ", members,
-            "List: ", lists,
-            "Labels: ", labels);
-    }
-
-
-    console.log("let the magic beginds");
-
-    const cardName = await HELPER.card.getName(t, {card});
-    const members = await HELPER.board.getMembers(t, {board});
-    const newCardName = cardName + " 1";
-    await HELPER.card.updateName(t, {card, name: newCardName});
-    await HELPER.card.addMember(t, {card, member: "54a94d03ad9dfede1a13f59f"});
-    await HELPER.card.removeMember(t, {card, member: "534a0cf75530fa95323f352c"});
-
-    await HELPER.card.addLabel(t, {card, label: "54a94d03ad9dfede1a13f59f"});
-    await HELPER.card.removeLabel(t, {card, label: "534a0cf75530fa95323f352c"});
-
-
-    console.log("MAGIC COMPLETED!");
-    console.log("Members: ", members);
-
-    return;
-
-    // In this case we want to attach that park to the card as an attachment
-    // but first let's ensure that the user can write on this model
-    if (t.memberCanWriteToModel('card')) {
-        return t.attach({url: urlForCode, name: nameForCode})
-            .then(function () {
-                // once that has completed we should tidy up and close the popup
-                return t.closePopup();
-            });
-    } else {
-        console.log("Oh no! You don't have permission to add attachments to this card.")
-        return t.closePopup(); // We're just going to close the popup for now.
-    }
 
 
 }
@@ -130,9 +77,9 @@ const updateCardStatus = async function (t, {
     lstu: listMove = '',
     brdu: boardMove = '',
     archive: isArchive = false,
+    complete: isComplete = false,
     dateRelative: dueDateRelativeMinutes = 0,
 }) {
-
     const {board, card} = await HELPER.getContext(t)
     const cardName = await HELPER.card.getName(t, {card});
     const members = await HELPER.board.getMembers(t, {board});
@@ -149,6 +96,8 @@ const updateCardStatus = async function (t, {
         cardConfig["idLabels"] = labels.join();
     if (isArchive)
         cardConfig["closed"] = true
+    if (isComplete)
+        cardConfig["dueComplete"] = true
 
     if (Object.keys(cardConfig).length > 0) {
         await HELPER.card.update(t, {card, ...cardConfig});

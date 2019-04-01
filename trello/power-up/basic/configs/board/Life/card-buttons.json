@@ -3,8 +3,8 @@
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
       "text": "Working on it-1hr",
-      "lbl": [
-        "553d0b96664ce8ff30792a3e"
+      "lbln": [
+        "Working on it"
       ],
       "lstu": "5b395c2ded29ce7be3dd7e6d",
       "complete": false,
@@ -13,8 +13,8 @@
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
       "text": "Working on it-3hr",
-      "lbl": [
-        "553d0b96664ce8ff30792a3e"
+      "lbln": [
+        "Working on it"
       ],
       "lstu": "5b395c2ded29ce7be3dd7e6d",
       "complete": false,
@@ -23,8 +23,8 @@
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
       "text": "zCompleted",
-      "lbl": [
-        "553d0b96664ce8ff30792a3c"
+      "lbln": [
+        "Completed"
       ],
       "archive": true,
       "complete": true

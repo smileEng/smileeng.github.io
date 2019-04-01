@@ -79,6 +79,7 @@ const updateCardStatus = async function (t, {
     lstnu: listMoveByName = '',
     brdu: boardMove = '',
     mmb: members = [],
+    mmbn: memberUsernames = [],
     mmbd: memberDeleteAll = false,
     archive: isArchive = false,
     complete: isComplete = false,
@@ -120,6 +121,21 @@ const updateCardStatus = async function (t, {
             labelNameByIds = foundLabels;
     }
 
+
+    let memberUsernamesById = [];
+    if (memberUsernames.length > 0) {
+        const allMembers = await HELPER.board.getMembers(t, {board})
+        const foundMembers = allMembers
+            .filter(function (l) {
+                return memberUsernames.includes(l.username)
+            })
+            .map(function (l) {
+                return l.id;
+            });
+
+        if (foundMembers)
+            memberUsernamesById = foundMembers;
+    }
 
     //Building the card config
     let cardConfig = {};
@@ -164,8 +180,11 @@ const updateCardStatus = async function (t, {
     if (memberDeleteAll)
         cardConfig["idMembers"] = [];
 
-    if (members.length > 0)
-        cardConfig["idMembers"] = members;
+    if (memberUsernamesById.length > 0 || members.length > 0)
+        cardConfig["idMembers"] =
+            memberUsernamesById.length > 0
+                ? memberUsernamesById.join()
+                : members.join();
 
 
     cardConfig["dueComplete"] = isComplete

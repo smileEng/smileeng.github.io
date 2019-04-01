@@ -1,17 +1,32 @@
 {
   "card-buttons": [
-
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
+      "text": "HRBOT-Task",
+      "mmbn": [
+        "ooitiathan"
+      ],
+      "dayRelative": 2,
+      "prefix": "HRBOT - ",
+      "time": "18:00",
+      "lstnu": "To Do"
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
+      "text": "8CBOT-Task",
+      "mmbn": [
+        "akmaldjumakhodjaev"
+      ],
+      "prefix": "8CBOT - ",
+      "time": "18:00",
+      "lstnu": "To Do"
+    },
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
-      "text": "zCompleted",
-      "description": "Move card to completed, tag with completed & mark as completed.",
-      "lstnu" : "Completed",
-      "lbln": [
-        "Completed"
-      ],
-      "complete": true
+      "text": "Completed",
+      "mmbd": true,
+      "complete": true,
+      "lstnu": "zCompleted"
     }
-
-
   ]
 }

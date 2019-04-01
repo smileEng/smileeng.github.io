@@ -74,7 +74,9 @@ const updateCardStatus = async function (t, {
     lbld: labelDelete = [],
     lbla: labelAdd = [],
     lbl: labels = [],
+    lbln: labelNames = [],
     lstu: listMove = '',
+    lstnu: listMoveByName = '',
     brdu: boardMove = '',
     archive: isArchive = false,
     complete: isComplete = false,
@@ -83,6 +85,12 @@ const updateCardStatus = async function (t, {
     const {board, card} = await HELPER.getContext(t)
     const cardName = await HELPER.card.getName(t, {card});
     const members = await HELPER.board.getMembers(t, {board});
+
+
+    //resolve listMoveByName
+    //resolve labelNames
+
+
 
     let cardConfig = {};
 

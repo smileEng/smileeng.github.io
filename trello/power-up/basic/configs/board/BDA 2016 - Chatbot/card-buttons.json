@@ -1,33 +1,15 @@
 {
   "card-buttons": [
-    {
-      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
-      "text": "Working on it-1hr",
-      "lbl": [
-        "5c9d4ead91d0c2ddc50e7bb6"
-      ],
-      "lstu": "5c9df8cc90f4dd50c0666271",
-      "dateRelative": 60
-    },
-    {
-      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
-      "text": "Working on it-3hr",
-      "lbl": [
-        "5c9d4ead91d0c2ddc50e7bb6"
-      ],
-      "lstu": "5c9df8cc90f4dd50c0666271",
-      "dateRelative": 180
-    },
+
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
       "text": "zCompleted",
-
-      "lbl": [
-        "5ca07f13a3c8b947fcc3311d"
+      "description": "Move card to completed, tag with completed & mark as completed.",
+      "lstnu" : "Completed",
+      "lbln": [
+        "Completed"
       ],
-      "archive": true,
-      "complete": true,
-      "dateRelative": 180
+      "complete": true
     }
   ]
 }

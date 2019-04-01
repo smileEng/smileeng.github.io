@@ -104,7 +104,7 @@ const updateCardStatus = async function (t, {
             return labelNames.includes(l.name)
         });
 
-        if (foundList)
+        if (foundLabels)
             labelNameByIds = foundLabels;
     }
 

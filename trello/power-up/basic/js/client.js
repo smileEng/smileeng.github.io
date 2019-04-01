@@ -85,12 +85,13 @@ const updateCardStatus = async function (t, {
     dateRelative: dueDateRelativeMinutes = 0,
     dayRelative: dueDateRelativeDay = 0,
     time: dueTime = 0,
+
 }) {
+
     const {board, card} = await HELPER.getContext(t)
-    const cardName = await HELPER.card.getName(t, {card});
-    const members = await HELPER.board.getMembers(t, {board});
+    // const members = await HELPER.board.getMembers(t, {board});
 
-
+    //Prepare all the variables
     let listMoveByNameId = "";
     if (listMoveByName) {
         const allList = await HELPER.board.getLists(t, {board})
@@ -119,7 +120,15 @@ const updateCardStatus = async function (t, {
             labelNameByIds = foundLabels;
     }
 
+
+    //Building the card config
     let cardConfig = {};
+
+    if (cardTitlePrefix) {
+        const cardName = await HELPER.card.getName(t, {card});
+        const newCardName = `${cardTitlePrefix}${cardName}`
+        cardConfig["name"] = newCardName;
+    }
 
     if (listMoveByNameId || listMove)
         cardConfig["idList"] = listMoveByNameId || listMove;
@@ -127,8 +136,10 @@ const updateCardStatus = async function (t, {
     if (boardMove)
         cardConfig["idBoard"] = boardMove;
 
+    //Card Config due date computations [minute, day, and time fix setter]
     if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0)
         cardConfig["due"] = moment().add("minutes", dueDateRelativeMinutes).toISOString();
+
     if (dueDateRelativeDay && dueDateRelativeDay !== 0) {
         const dueConfig = cardConfig["due"] ? moment(cardConfig["due"]) : moment();
         cardConfig["due"] = dueConfig.add("days", dueDateRelativeDay).toISOString();
@@ -155,6 +166,7 @@ const updateCardStatus = async function (t, {
 
     if (mmb.length > 0)
         cardConfig["idMembers"] = mmb;
+
 
     cardConfig["dueComplete"] = true
 

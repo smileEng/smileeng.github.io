@@ -178,7 +178,7 @@ const updateCardStatus = async function (t, {
         cardConfig["closed"] = true
 
     if (memberDeleteAll)
-        cardConfig["idMembers"] = [];
+        cardConfig["idMembers"] = "";
 
     if (memberUsernamesById.length > 0 || members.length > 0)
         cardConfig["idMembers"] =

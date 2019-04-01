@@ -91,12 +91,17 @@ const updateCardStatus = async function (t, {
 }) {
 
     const {board, card} = await HELPER.getContext(t)
+
+    //if user define board move, name will be resolve base on NEXT BOARD. not current
+    const effectiveBoardId = boardMove || board;
+
+
     // const members = await HELPER.board.getMembers(t, {board});
 
     //Prepare all the variables
     let listMoveByNameId = "";
     if (listMoveByName) {
-        const allList = await HELPER.board.getLists(t, {board})
+        const allList = await HELPER.board.getLists(t, {board: effectiveBoardId})
         const foundList = allList
             .find(function (l) {
                 return l.name == listMoveByName
@@ -109,7 +114,7 @@ const updateCardStatus = async function (t, {
     let labelNameByIds = [];
     if (labelNames.length > 0) {
 
-        const allLabels = await HELPER.board.getLabels(t, {board})
+        const allLabels = await HELPER.board.getLabels(t, {board: effectiveBoardId})
         const foundLabels = allLabels
             .filter(function (l) {
                 return labelNames.includes(l.name)
@@ -125,7 +130,7 @@ const updateCardStatus = async function (t, {
 
     let memberUsernamesById = [];
     if (memberUsernames.length > 0) {
-        const allMembers = await HELPER.board.getMembers(t, {board})
+        const allMembers = await HELPER.board.getMembers(t, {board: effectiveBoardId})
         const foundMembers = allMembers
             .filter(function (l) {
                 return memberUsernames.includes(l.username)

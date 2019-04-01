@@ -89,9 +89,11 @@ const updateCardStatus = async function (t, {
     let listMoveByNameId = "";
     if (listMoveByName) {
         const allList = await HELPER.board.getLists(t, {board})
-        const foundList = allList.find(function (l) {
-            return l.name == listMoveByName
-        });
+        const foundList = allList
+            .find(function (l) {
+                return l.name == listMoveByName
+            })
+
         if (foundList)
             listMoveByNameId = foundList.name;
     }
@@ -100,9 +102,13 @@ const updateCardStatus = async function (t, {
     if (labelNames.length > 0) {
 
         const allLabels = await HELPER.board.getLabels(t, {board})
-        const foundLabels = allLabels.filter(function (l) {
-            return labelNames.includes(l.name)
-        });
+        const foundLabels = allLabels
+            .filter(function (l) {
+                return labelNames.includes(l.name)
+            })
+            .map(function (l) {
+                return l.id;
+            });
 
         if (foundLabels)
             labelNameByIds = foundLabels;

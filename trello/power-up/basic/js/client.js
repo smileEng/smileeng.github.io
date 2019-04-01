@@ -112,65 +112,7 @@ const updateCardStatus = async function (t, {
 
 // We need to call initialize to get all of our capability handles set up and registered with Trello
 TrelloPowerUp.initialize({
-    // NOTE about asynchronous responses
-    // If you need to make an asynchronous request or action before you can reply to Trello
-    // you can return a Promise (bluebird promises are included at TrelloPowerUp.Promise)
-    // The Promise should resolve to the object type that is expected to be returned
-    'attachment-sections': function (t, options) {
-        // options.entries is a list of the attachments for this card
-        // you can look through them and 'claim' any that you want to
-        // include in your section.
-
-        // we will just claim urls for Yellowstone
-        var claimed = options.entries.filter(function (attachment) {
-            return attachment.url.indexOf('http://www.nps.gov/yell/') === 0;
-        });
-
-        // you can have more than one attachment section on a card
-        // you can group items together into one section, have a section
-        // per attachment, or anything in between.
-        if (claimed && claimed.length > 0) {
-            // if the title for your section requires a network call or other
-            // potentially length operation you can provide a function for the title
-            // that returns the section title. If you do so, provide a unique id for
-            // your section
-            return [{
-                id: 'Yellowstone', // optional if you aren't using a function for the title
-                claimed: claimed,
-                icon: GLITCH_ICON,
-                title: 'Example Attachment Section: Yellowstone',
-                content: {
-                    type: 'iframe',
-                    url: t.signUrl('./section.html', {arg: 'you can pass your section args here'}),
-                    height: 230
-                }
-            }];
-        } else {
-            return [];
-        }
-    },
-
-    'board-buttons': function (t, options) {
-        return [{
-            // we can either provide a button that has a callback function
-            // that callback function should probably open a popup, overlay, or boardBar
-            icon: WHITE_ICON,
-            text: 'Popup',
-            callback: boardButtonCallback
-        }, {
-            // or we can also have a button that is just a simple url
-            // clicking it will open a new tab at the provided url
-            icon: WHITE_ICON,
-            text: 'URL',
-            url: 'https://trello.com/inspiration',
-            target: 'Inspiring Boards' // optional target for above url
-        }];
-    },
-    'card-badges': function (t, options) {
-        return getBadges(t);
-    },
     'card-buttons': async function (t, options) {
-        // return new Promise(async function (resolve) {
         return t
             .get('board', 'private', 'jsonUrl')
             .then(function (jsonUrl) {
@@ -194,22 +136,6 @@ TrelloPowerUp.initialize({
                 return [];
             });
     },
-
-
-    'format-url': function (t, options) {
-        // options.url has the url that we are being asked to format
-        // in our response we can include an icon as well as the replacement text
-
-        return {
-            icon: GRAY_ICON, // don't use a colored icon here
-            text: '👉 ' + options.url + ' 👈'
-        };
-
-        // if we don't actually have any valuable information about the url
-        // we can let Trello know like so:
-        // throw t.NotHandled();
-    },
-
     'show-settings': function (t, options) {
         // when a user clicks the gear icon by your Power-Up in the Power-Ups menu
         // what should Trello show. We highly recommend the popup in this case as
@@ -221,14 +147,10 @@ TrelloPowerUp.initialize({
         });
     },
     /*
-    /*
-
         🔑 Authorization Capabiltiies 🗝
-
         The following two capabilities should be used together to determine:
         1. whether a user is appropriately authorized
         2. what to do when a user isn't completely authorized
-
     */
     'authorization-status': function (t, options) {
         // Return a promise that resolves to an object with a boolean property 'authorized' of true or false
@@ -292,6 +214,79 @@ var a = {
     },
     version: "build-2906",
 }
+
+
+// NOTE about asynchronous responses
+// If you need to make an asynchronous request or action before you can reply to Trello
+// you can return a Promise (bluebird promises are included at TrelloPowerUp.Promise)
+// The Promise should resolve to the object type that is expected to be returned
+// 'attachment-sections': function (t, options) {
+//     // options.entries is a list of the attachments for this card
+//     // you can look through them and 'claim' any that you want to
+//     // include in your section.
+//
+//     // we will just claim urls for Yellowstone
+//     var claimed = options.entries.filter(function (attachment) {
+//         return attachment.url.indexOf('http://www.nps.gov/yell/') === 0;
+//     });
+//
+//     // you can have more than one attachment section on a card
+//     // you can group items together into one section, have a section
+//     // per attachment, or anything in between.
+//     if (claimed && claimed.length > 0) {
+//         // if the title for your section requires a network call or other
+//         // potentially length operation you can provide a function for the title
+//         // that returns the section title. If you do so, provide a unique id for
+//         // your section
+//         return [{
+//             id: 'Yellowstone', // optional if you aren't using a function for the title
+//             claimed: claimed,
+//             icon: GLITCH_ICON,
+//             title: 'Example Attachment Section: Yellowstone',
+//             content: {
+//                 type: 'iframe',
+//                 url: t.signUrl('./section.html', {arg: 'you can pass your section args here'}),
+//                 height: 230
+//             }
+//         }];
+//     } else {
+//         return [];
+//     }
+// },
+
+// 'board-buttons': function (t, options) {
+//     return [{
+//         // we can either provide a button that has a callback function
+//         // that callback function should probably open a popup, overlay, or boardBar
+//         icon: WHITE_ICON,
+//         text: 'Popup',
+//         callback: boardButtonCallback
+//     }, {
+//         // or we can also have a button that is just a simple url
+//         // clicking it will open a new tab at the provided url
+//         icon: WHITE_ICON,
+//         text: 'URL',
+//         url: 'https://trello.com/inspiration',
+//         target: 'Inspiring Boards' // optional target for above url
+//     }];
+// },
+// 'card-badges': function (t, options) {
+//     return getBadges(t);
+// },
+//
+// 'format-url': function (t, options) {
+//     // options.url has the url that we are being asked to format
+//     // in our response we can include an icon as well as the replacement text
+//
+//     return {
+//         icon: GRAY_ICON, // don't use a colored icon here
+//         text: '👉 ' + options.url + ' 👈'
+//     };
+//
+//     // if we don't actually have any valuable information about the url
+//     // we can let Trello know like so:
+//     // throw t.NotHandled();
+// },
 
 
 // Promise

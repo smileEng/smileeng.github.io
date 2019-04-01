@@ -168,7 +168,7 @@ const updateCardStatus = async function (t, {
         cardConfig["idMembers"] = members;
 
 
-    cardConfig["dueComplete"] = true
+    cardConfig["dueComplete"] = isComplete
 
     if (Object.keys(cardConfig).length > 0) {
         await HELPER.card.update(t, {card, ...cardConfig});

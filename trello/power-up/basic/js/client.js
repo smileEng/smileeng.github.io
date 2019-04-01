@@ -164,8 +164,8 @@ const updateCardStatus = async function (t, {
     if (memberDeleteAll)
         cardConfig["idMembers"] = [];
 
-    if (mmb.length > 0)
-        cardConfig["idMembers"] = mmb;
+    if (members.length > 0)
+        cardConfig["idMembers"] = members;
 
 
     cardConfig["dueComplete"] = true

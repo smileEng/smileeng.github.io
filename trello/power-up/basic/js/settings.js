@@ -38,7 +38,7 @@ document.getElementById('showSettings')
         console.log("Boards:", boards)
 
         const {board} = await HELPER.getContext(t)
-        const filterByBoardId = boardNameInputText.text || board;
+        const filterByBoardId = boardNameInputText.value || board;
         const filteredBoards = boards.filter((d) => d.id == filterByBoardId);
         for (const index in filteredBoards) {
             const board = filteredBoards[index];

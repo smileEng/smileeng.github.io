@@ -1,6 +1,20 @@
 {
   "card-buttons": [
     {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-crown.svg?color=798d99",
+      "text": "Assign Self",
+      "brdu": "553d0b96dc6ecd37ee96ddf6",
+      "mmbn": [
+        "adrianengyingming"
+      ],
+      "complete": false,
+      "pos": "bottom",
+      "lbln": [
+        "Upcoming"
+      ],
+      "lstnu": "OnGoing ⏰"
+    },
+    {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
       "text": "Completed",
       "mmbd": true,

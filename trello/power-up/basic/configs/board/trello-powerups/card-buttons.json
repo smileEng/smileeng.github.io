@@ -5,7 +5,7 @@
       "text": "Completed",
       "mmbd": true,
       "complete": true,
-      "listnu": "Completed"
+      "lstnu": "Completed"
     },
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
@@ -14,7 +14,7 @@
       "dayRelative": 2,
       "prefix" : "HRBOT - ",
       "time": "18:00",
-      "listnu": "To Do"
+      "lstnu": "To Do"
     },
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
@@ -22,7 +22,7 @@
       "mmb": ["552a6e398c4bd76261bf4db9"],
       "prefix" : "8CBOT - ",
       "time": "18:00",
-      "listnu": "To Do"
+      "lstnu": "To Do"
     },
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",

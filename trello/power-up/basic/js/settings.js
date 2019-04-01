@@ -46,11 +46,10 @@ document.getElementById('showSettings')
             const lists = await HELPER.board.getLists(t, {board: id});
             const labels = await HELPER.board.getLabels(t, {board: id});
             const members = await HELPER.board.getMembers(t, {board: id});
-            console.log(
-                "Board", board,
-                "members: ", members,
-                "List: ", lists,
-                "Labels: ", labels);
+            console.log("Board", board);
+            console.log("Members: ", members);
+            console.log("List: ", lists);
+            console.log("Labels: ", labels);
         }
         console.log("Completed print trace.")
 

@@ -99,7 +99,7 @@ const updateCardStatus = async function (t, {
     let labelNameByIds = [];
     if (labelNames.length > 0) {
 
-        const allLabels = await HELPER.board.getBoardLabels(t, {board})
+        const allLabels = await HELPER.board.getLabels(t, {board})
         const foundLabels = allLabels.filter(function (l) {
             return labelNames.includes(l.name)
         });

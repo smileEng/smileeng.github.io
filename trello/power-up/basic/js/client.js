@@ -67,7 +67,6 @@ var boardButtonCallback = function (t) {
 const trelloBoardDetailsPrintout = async function (t) {
 
 
-
 }
 
 const updateCardStatus = async function (t, {
@@ -91,7 +90,6 @@ const updateCardStatus = async function (t, {
     //resolve labelNames
 
 
-
     let cardConfig = {};
 
     if (listMove)
@@ -104,9 +102,8 @@ const updateCardStatus = async function (t, {
         cardConfig["idLabels"] = labels.join();
     if (isArchive)
         cardConfig["closed"] = true
-    if (isComplete)
-        cardConfig["dueComplete"] = true
 
+    cardConfig["dueComplete"] = true
     if (Object.keys(cardConfig).length > 0) {
         await HELPER.card.update(t, {card, ...cardConfig});
     }

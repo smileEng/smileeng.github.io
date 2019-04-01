@@ -2,6 +2,15 @@
   "card-buttons": [
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
+      "text": "Perform by Name - Completed",
+      "lbln" : [
+          "Completed"
+      ],
+      "lstnu": "Completed",
+      "complete": true
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-rocket.svg?color=798d99",
       "text": "Working on it-1hr",
       "lbl": [
         "5c9d4ead91d0c2ddc50e7bb6"

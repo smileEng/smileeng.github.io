@@ -86,20 +86,45 @@ const updateCardStatus = async function (t, {
     const members = await HELPER.board.getMembers(t, {board});
 
 
-    //resolve listMoveByName
-    //resolve labelNames
+    let listMoveByNameId = "";
+    if (listMoveByName) {
+        const allList = await HELPER.board.getLists(t, {board})
+        const foundList = allList.find(function (l) {
+            return l.name == listMoveByName
+        });
+        if (foundList)
+            listMoveByNameId = foundList.name;
+    }
 
+    let labelNameByIds = [];
+    if (labelNames.length > 0) {
+
+        const allLabels = await HELPER.board.getBoardLabels(t, {board})
+        const foundLabels = allLabels.filter(function (l) {
+            return labelNames.includes(l.name)
+        });
+
+        if (foundList)
+            labelNameByIds = foundLabels;
+    }
 
     let cardConfig = {};
 
-    if (listMove)
-        cardConfig["idList"] = listMove;
+    if (listMoveByNameId || listMove)
+        cardConfig["idList"] = listMoveByNameId || listMove;
+
     if (boardMove)
         cardConfig["idBoard"] = boardMove;
+
     if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0)
         cardConfig["due"] = moment().add("minutes", dueDateRelativeMinutes).toISOString();
-    if (labels.length > 0)
-        cardConfig["idLabels"] = labels.join();
+
+    if (labelNameByIds.length > 0 || labels.length > 0)
+        cardConfig["idLabels"] =
+            labelNameByIds.length > 0
+                ? labelNameByIds.join()
+                : labels.join()
+
     if (isArchive)
         cardConfig["closed"] = true
 

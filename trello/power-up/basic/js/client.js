@@ -64,10 +64,6 @@ var boardButtonCallback = function (t) {
     });
 };
 
-const trelloBoardDetailsPrintout = async function (t) {
-
-
-}
 
 const updateCardStatus = async function (t, {
     prefix: cardTitlePrefix = "",
@@ -85,6 +81,7 @@ const updateCardStatus = async function (t, {
     complete: isComplete = false,
     dateRelative: dueDateRelativeMinutes = 0,
     dayRelative: dueDateRelativeDay = 0,
+    isIncludeWeekends = false,
     time: dueTime = 0,
     pos = ""
 
@@ -167,7 +164,11 @@ const updateCardStatus = async function (t, {
 
     if (dueDateRelativeDay && dueDateRelativeDay !== 0) {
         const dueConfig = cardConfig["due"] ? moment(cardConfig["due"]) : moment();
-        cardConfig["due"] = dueConfig.add("days", dueDateRelativeDay).toISOString();
+        if (isIncludeWeekends) {
+            cardConfig["due"] = dueConfig.add("days", dueDateRelativeDay).toISOString();
+        } else {
+            cardConfig["due"] = addBusinessDays(dueConfig, dueDateRelativeDay).toISOString()
+        }
     }
 
     if (dueTime && dueTime !== 0) {
@@ -202,6 +203,18 @@ const updateCardStatus = async function (t, {
         await HELPER.card.update(t, {card, ...cardConfig});
     }
 }
+
+
+function addBusinessDays(momentDate, days) {
+    const d = momentDate.add(Math.floor(days / 5) * 7, 'd');
+    let remaining = days % 5;
+    while (remaining) {
+        d.add(1, 'd');
+        if (d.day() !== 0 && d.day() !== 6)
+            remaining--;
+    }
+    return d;
+};
 
 
 // We need to call initialize to get all of our capability handles set up and registered with Trello

@@ -6,6 +6,7 @@
       "lbln": [
         "Upcoming"
       ],
+      "pos": "top",
       "complete": false,
       "dateRelative": 60
     },

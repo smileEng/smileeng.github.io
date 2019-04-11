@@ -1,0 +1,16 @@
+{
+  "card-buttons": [
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-crown.svg?color=798d99",
+      "text": "HRBOT - Ready for Review",
+      "brdu": "553d0b96dc6ecd37ee96ddf6",
+      "mmbn": [
+        "adrianengyingming",
+        "ooitiathan"
+      ],
+      "complete": false,
+      "pos": "top",
+      "lstnu": "Reviewing"
+    }
+  ]
+}

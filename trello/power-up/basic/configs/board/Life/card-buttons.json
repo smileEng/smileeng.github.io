@@ -48,18 +48,19 @@
       ],
       "archive": true,
       "complete": true
-    },
-    {
-      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-hourglass-half.svg?color=798d99",
-      "text": "zTomorrow",
-      "lbln": [
-        "Upcoming"
-      ],
-      "complete": false,
-      "pos": "bottom",
-      "dayRelative": 1,
-      "time": "7:00",
-      "lstnu": "OnGoing ⏰"
     }
+//  ,
+//    {
+//      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-hourglass-half.svg?color=798d99",
+//      "text": "zTomorrow",
+//      "lbln": [
+//        "Upcoming"
+//      ],
+//      "complete": false,
+//      "pos": "bottom",
+//      "dayRelative": 1,
+//      "time": "7:00",
+//      "lstnu": "OnGoing ⏰"
+//    }
   ]
 }

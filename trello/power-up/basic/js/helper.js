@@ -50,7 +50,7 @@ const helper = function ({key}) {
        ...data
     }) {
         try {
-            const url = `${baseUrl}cards?${await getAuthQS(t)}&value=${member}`;
+            const url = `${baseUrl}cards?${await getAuthQS(t)}`;
             const result = await $.ajax({
                 url,
                 type: 'POST',

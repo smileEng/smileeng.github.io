@@ -55,15 +55,16 @@
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/white/fas-sun.svg",
       "text": "Daily",
       "action_type": "clone_card",
+      "idBoard": "553d0b96dc6ecd37ee96ddf6",
       "idCardSource": "5c3bfafd7a58bb1fed72662a",
-      "keepFromSource": ["due", "checklists", "stickers"],
-      "lbln": [
-        "Upcoming"
+      "idList": "5b395c2ded29ce7be3dd7e6d",
+      "keepFromSource": [
+        "due",
+        "checklists",
+        "stickers"
       ],
-      "pos": "top",
-      "lstnu": "OnGoing ⏰",
-      "dateRelative": 60,
-      "complete": false
+      "name": "Manage Board",
+      "pos": "top"
     }
   ]
 }

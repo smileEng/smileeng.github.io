@@ -81,14 +81,14 @@ const processAction = async function (t, parameters) {
 const cloneCardAction = async function (t, parameters) {
 
     const cardConfig = {
-        idBoard: "553d0b96dc6ecd37ee96ddf6",
-        idCardSource: "5c3bfafd7a58bb1fed72662a",
-        idList: "5b395c2ded29ce7be3dd7e6d",
-        keepFromSource: ["due", "checklists", "stickers"],
-        name: "Manage Board",
-        pos: "top",
-        // token: "534a0cf75530fa95323f352c/u1K0zYVxJrgwXseLnkF2DwLlCehF2GFCPryNNB2zzgAH6RbkFkT5KzXidKMAAMQu"
-    };
+        idBoard: parameters["idBoard"],
+        idCardSource: parameters["idCardSource"],
+        idList: parameters["idList"],
+        keepFromSource: parameters["keepFromSource"],
+        name: parameters["name"],
+        pos: parameters["pos"]
+    }
+
 
     await HELPER.card.clone(t, {...cardConfig});
 }

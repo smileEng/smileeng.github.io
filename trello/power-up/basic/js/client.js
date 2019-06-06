@@ -66,7 +66,31 @@ var boardButtonCallback = function (t) {
 
 
 const processAction = async function (t, parameters) {
-    console.log("PROCESSING ACTION", t, parameters);
+
+    const {action_type} = parameters;
+    switch (action_type) {
+        case "clone_card":
+            return await cloneCardAction(t, parameters);
+        default:
+            console.error("Unknonw action type: " + action_type);
+            return;
+    }
+}
+
+
+const cloneCardAction = async function (t, parameters) {
+
+    const cardConfig = {
+        idBoard: "553d0b96dc6ecd37ee96ddf6",
+        idCardSource: "5c3bfafd7a58bb1fed72662a",
+        idList: "5b395c2ded29ce7be3dd7e6d",
+        keepFromSource: ["due", "checklists", "stickers"],
+        name: "Manage Board",
+        pos: "top",
+        // token: "534a0cf75530fa95323f352c/u1K0zYVxJrgwXseLnkF2DwLlCehF2GFCPryNNB2zzgAH6RbkFkT5KzXidKMAAMQu"
+    };
+
+    await HELPER.card.clone(t, {...cardConfig});
 }
 
 

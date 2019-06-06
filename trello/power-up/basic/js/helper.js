@@ -46,6 +46,26 @@ const helper = function ({key}) {
         return name;
     }
 
+    async function cloneCard(t, {
+       ...data
+    }) {
+        try {
+            const url = `${baseUrl}cards?${await getAuthQS(t)}&value=${member}`;
+            const result = await $.ajax({
+                url,
+                type: 'POST',
+                contentType: 'application/json',
+                data
+            });
+            return 1;
+        } catch (e) {
+            //if added will also throw error. LMFAO
+            console.error(e)
+            return 0;
+        }
+
+    }
+
     async function updateCardConfig(t, {
         card,
         ...configs
@@ -157,6 +177,7 @@ const helper = function ({key}) {
         card: {
             getName: getCardName,
             update: updateCardConfig,
+            clone: cloneCard,
             addMember: addMemberToCard,
             removeMember: removeMemberToCard,
             removeAllMembers: removeAllMembersFromCard,

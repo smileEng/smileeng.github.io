@@ -52,10 +52,11 @@
   ],
   "board-buttons": [
     {
-      "action_type": "clone_card",
-      "clone_card_id": "",
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/white/fas-sun.svg",
       "text": "Daily",
+      "action_type": "clone_card",
+      "idCardSource": "5c3bfafd7a58bb1fed72662a",
+      "keepFromSource": ["due", "checklists", "stickers"],
       "lbln": [
         "Upcoming"
       ],

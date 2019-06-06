@@ -65,6 +65,11 @@ var boardButtonCallback = function (t) {
 };
 
 
+const processAction = async function (t, parameters) {
+    console.log("PROCESSING ACTION", t, parameters);
+}
+
+
 const updateCardStatus = async function (t, {
     prefix: cardTitlePrefix = "",
     lbld: labelDelete = [],
@@ -298,7 +303,43 @@ TrelloPowerUp.initialize({
         } else {
             console.log("🙈 Looks like you need to add your API key to the project!");
         }
-    }
+    },
+    'board-buttons': function (t, options) {
+        return t
+            .get('board', 'private', 'jsonUrl')
+            .then(function (jsonUrl) {
+                const cardButtonsJsonPath = `${jsonUrl}/card-buttons.json`;
+                return $.get(cardButtonsJsonPath);
+            })
+            .then(function (cardButtonConfig) {
+                return cardButtonConfig["board-buttons"]
+                    .map(function ({icon, text, ...parameters}) {
+                        return {
+                            icon,
+                            text,
+                            callback: function (t) {
+                                return processAction(t, parameters)
+                            }
+                        };
+                    })
+            })
+            .catch(function (e) {
+                console.error("An error has occured while trying to load json");
+                return [];
+            });
+
+
+        // return [{
+        //     // we can either provide a button that has a callback function
+        //     // that callback function should probably open a popup, overlay, or boardBar
+        //     icon: WHITE_ICON,
+        //     text: 'Daily Routine',
+        //     callback: function (t) {
+        //         //base on action type
+        //         //find the managing car
+        //     }
+        // }];
+    },
 }, {
     appKey: '9ed85a487eb0b08bff2f11e84cc80c16',
     appName: 'My own power up'

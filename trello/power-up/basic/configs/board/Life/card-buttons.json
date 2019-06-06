@@ -49,5 +49,20 @@
       "archive": true,
       "complete": true
     }
+  ],
+  "board-buttons": [
+    {
+      "action_type": "clone_card",
+      "clone_card_id": "",
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/white/fas-sun.svg",
+      "text": "Daily",
+      "lbln": [
+        "Upcoming"
+      ],
+      "pos": "top",
+      "lstnu": "OnGoing ⏰",
+      "dateRelative": 60,
+      "complete": false
+    }
   ]
 }

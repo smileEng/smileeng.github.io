@@ -47,17 +47,24 @@ const helper = function ({key}) {
     }
 
     async function cloneCard(t, {
-       ...data
+       ...configs
     }) {
         try {
-            const url = `${baseUrl}cards?${await getAuthQS(t)}`;
-            const result = await $.ajax({
-                url,
-                type: 'POST',
-                contentType: 'application/json',
-                data
-            });
+
+
+            const queryStirng = decodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
+            const url = `${baseUrl}cards?${queryStirng}`;
+            const result = await $.ajax({url, type: 'POST'});
             return 1;
+
+            // const url = `${baseUrl}cards?${await getAuthQS(t)}`;
+            // const result = await $.ajax({
+            //     url,
+            //     type: 'POST',
+            //     contentType: 'application/json',
+            //     data
+            // });
+            // return 1;
         } catch (e) {
             //if added will also throw error. LMFAO
             console.error(e)

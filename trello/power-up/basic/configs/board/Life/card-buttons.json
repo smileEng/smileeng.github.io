@@ -61,7 +61,8 @@
       "keepFromSource": [
         "due",
         "checklists",
-        "stickers"
+        "stickers",
+        "attachments"
       ],
       "name": "Manage Board",
       "pos": "top"

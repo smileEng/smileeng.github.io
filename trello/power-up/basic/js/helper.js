@@ -52,6 +52,7 @@ const helper = function ({key}) {
         try {
 
 
+            //keepFromSource: attachments,checklists,comments,due,labels,members,stickers or all
             const queryStirng = decodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
             const url = `${baseUrl}cards?${queryStirng}`;
             const result = await $.ajax({url, type: 'POST'});

@@ -2,6 +2,18 @@
   "card-buttons": [
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
+      "text": "AD-TASK+1",
+      "mmbn": [
+        "akmaldj"
+      ],
+      "dayRelative": 1,
+      "prefix": "",
+      "time": "18:00",
+      "pos": "bottom",
+      "lstnu": "To Do"
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
       "text": "HRBOT-Task",
       "mmbn": [
         "ooitiathan"

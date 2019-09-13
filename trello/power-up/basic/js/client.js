@@ -96,6 +96,7 @@ const cloneCardAction = async function (t, parameters) {
 
 const updateCardStatus = async function (t, {
     prefix: cardTitlePrefix = "",
+    removeText: removeText = null, //text to be removed
     lbld: labelDelete = [],
     lbla: labelAdd = [],
     lbl: labels = [],
@@ -175,6 +176,12 @@ const updateCardStatus = async function (t, {
     if (cardTitlePrefix) {
         const cardName = await HELPER.card.getName(t, {card});
         const newCardName = `${cardTitlePrefix}${cardName}`
+        cardConfig["name"] = newCardName;
+    }
+
+    if (removeText){
+        const cardName = cardConfig["name"] ;
+        const newCardName = cardName.replace(new RegExp(removeText, 'g'), '');
         cardConfig["name"] = newCardName;
     }
 

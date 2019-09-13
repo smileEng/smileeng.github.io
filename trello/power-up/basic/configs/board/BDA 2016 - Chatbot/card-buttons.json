@@ -62,6 +62,14 @@
       "lstnu": "OnGoing ⏰"
     },
     {
+      "icon": "https://app.butlerfortrello.com/master-130/assets/fa-5.1.1/icons/grey/fas-edit.svg?color=42526e",
+      "text": "Reviewing",
+      "prefix": "✔️",
+      "complete": true,
+      "pos": "top",
+      "lstnu": "Reviewing✔️"
+    },
+    {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
       "text": "zCompleted",
       "mmbd": true,

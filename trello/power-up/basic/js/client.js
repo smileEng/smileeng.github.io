@@ -179,8 +179,8 @@ const updateCardStatus = async function (t, {
         cardConfig["name"] = newCardName;
     }
 
-    if (removeText){
-        const cardName = cardConfig["name"] ;
+    if (removeText) {
+        let cardName = (cardTitlePrefix) ? cardConfig["name"] : await HELPER.card.getName(t, {card});
         const newCardName = cardName.replace(new RegExp(removeText, 'g'), '');
         cardConfig["name"] = newCardName;
     }

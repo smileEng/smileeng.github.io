@@ -47,7 +47,7 @@ const helper = function ({key}) {
     }
 
     async function cloneCard(t, {
-       ...configs
+        ...configs
     }) {
         try {
 
@@ -89,9 +89,15 @@ const helper = function ({key}) {
 
         const queryStirng = decodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
         const url = `${baseUrl}cards/${card}?${queryStirng}`;
-        console.log("UDATE CARD Config URL: " + queryStirng)
-        const result = await $.ajax({url, type: 'PUT'});
-        return 1;
+
+        try {
+            console.log("UPDATE CARD Config URL: " + queryStirng)
+            const result = await $.ajax({url, type: 'PUT'});
+            return 1;
+        } catch (e) {
+            console.error("Failed to UPDATE CARD Config URL: " + queryStirng, e)
+            return 0;
+        }
     }
 
     async function addMemberToCard(t, {card, member}) {

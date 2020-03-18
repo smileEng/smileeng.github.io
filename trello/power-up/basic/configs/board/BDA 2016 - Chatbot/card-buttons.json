@@ -1,54 +1,5 @@
 {
-  "card-buttons": [
-    {
-      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
-      "text": "AD-TASK+1",
-      "mmbn": [
-        "akmaldju"
-      ],
-      "dayRelative": 1,
-      "prefix": "",
-      "time": "18:00",
-      "lstnu": "To Do"
-    },
-    {
-      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
-      "text": "AD-HRBOT-1",
-      "mmbn": [
-        "akmaldju"
-      ],
-      "dayRelative": 1,
-      "prefix": "HRBOT - ",
-      "time": "18:00",
-      "pos": "bottom",
-      "lstnu": "To Do"
-    },
-    {
-      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-bug.svg?color=798d99",
-      "text": "AD-HRBOT-2",
-      "mmbn": [
-        "akmaldju"
-      ],
-      "dayRelative": 2,
-      "prefix": "HRBOT - ",
-      "time": "18:00",
-      "pos": "bottom",
-      "lstnu": "To Do"
-    },
-    {
-      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/fas-crown.svg?color=798d99",
-      "text": "zAssign Self",
-      "brdu": "553d0b96dc6ecd37ee96ddf6",
-      "mmbn": [
-        "adrianengyingming"
-      ],
-      "complete": false,
-      "pos": "bottom",
-      "lbln": [
-        "Upcoming"
-      ],
-      "lstnu": "OnGoing ⏰"
-    },
+  "card-buttons": [        
     {
       "icon": "https://app.butlerfortrello.com/master-130/assets/fa-5.1.1/icons/grey/fas-edit.svg?color=42526e",
       "text": "Reviewing",

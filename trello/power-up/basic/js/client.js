@@ -104,9 +104,8 @@ const loopCardAction = async function (t, parameters) {
     const existingContext = await HELPER.getContext(t);
 
     for (let i = 0; i < cards.length; i++) {
-        const card = c
         t.getContext = async function () {
-            return {...existingContext, card}
+            return {...existingContext, card: cards[i].id}
         }
 
         await updateCardStatus(t, cardButton);

@@ -71,6 +71,8 @@ const processAction = async function (t, parameters) {
     switch (action_type) {
         case "clone_card":
             return await cloneCardAction(t, parameters);
+        case "loop_cards":
+            return await loopCardAction(t, parameters);
         default:
             console.error("Unknonw action type: " + action_type);
             return;
@@ -91,6 +93,24 @@ const cloneCardAction = async function (t, parameters) {
 
 
     await HELPER.card.clone(t, {...cardConfig});
+}
+
+
+const loopCardAction = async function (t, parameters) {
+    const idList = parameters["idList"];
+    const cardButton = parameters["card_button"];
+
+    const cards = await HELPER.list.getCards(t, {idList})
+    const existingContext = await HELPER.getContext(t);
+
+    for (let i = 0; i < cards.length; i++) {
+        const card = c
+        t.getContext = async function () {
+            return {...existingContext, card}
+        }
+
+        await updateCardStatus(t, cardButton);
+    }
 }
 
 

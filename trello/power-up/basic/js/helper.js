@@ -14,6 +14,9 @@ const helper = function ({key}) {
     }
 
 
+    //TODO: getMyCardLists(t, {list})
+    //
+
     async function getMyBoards(t) {
         const url = `${baseUrl}members/me/boards?${await getAuthQS(t)}&filter=open%2Cstarred`;
         const results = await $.get(url);
@@ -39,6 +42,12 @@ const helper = function ({key}) {
         return results;
     }
 
+
+    async function getListCards(t, {idList}){
+        const url = `${baseUrl}lists/${idList}/cards?${await getAuthQS(t)}`;
+        const results = await $.get(url);
+        return results;
+    }
 
     async function getCardName(t, {card}) {
         const url = `${baseUrl}cards/${card}/name?${await getAuthQS(t)}`;
@@ -187,6 +196,9 @@ const helper = function ({key}) {
             getMembers: getBoardMembers,
             getLists: getBoardLists,
             getLabels: getBoardLabels,
+        },
+        list:{
+            getCards: getListCards
         },
         card: {
             getName: getCardName,

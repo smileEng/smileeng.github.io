@@ -66,6 +66,19 @@
       ],
       "name": "Manage Board",
       "pos": "top"
+    },
+    {
+      "icon": "https://trello-attachments.s3.amazonaws.com/55096389f9e0a3c5e6d3b0d2/5c4825fb5768fc7b04de8ad5/8147070cf604e6520dcdc7f56d39b9b3/b627eec2b3248a3823afad233111f80e.png",
+      "text": "zCompleted",
+      "action_type": "loop_cards",
+      "idList": "5ec312f64ac9211ab1e02d56",
+      "card_button": {
+        "text": "zCompleted",
+        "mmbd": true,
+        "complete": true,
+        "pos": "top",
+        "lstnu": "SAMPLE LIST 2"
+      }
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "card-buttons": [        
+  "card-buttons": [
     {
       "icon": "https://app.butlerfortrello.com/master-130/assets/fa-5.1.1/icons/grey/fas-edit.svg?color=42526e",
       "text": "Reviewing",
@@ -7,6 +7,18 @@
       "complete": true,
       "pos": "top",
       "lstnu": "Reviewing✔️"
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "Ready For Testing",
+      "mmbd": true,
+      "complete": true,
+      "mmbn": [
+        "azuraabdlatif",
+        "khorcheanwei"
+      ],
+      "pos": "top",
+      "lstnu": "Ready for Testing"
     },
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",

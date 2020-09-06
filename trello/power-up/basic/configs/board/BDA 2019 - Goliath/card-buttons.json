@@ -15,6 +15,15 @@
       "complete": true,
       "pos": "top",
       "lstnu": "SYNCUP"
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "zTesting",
+      "complete": false,
+      "mmbn": [
+        "khorcheanwei"
+      ],
+      "time": "16:00"
     }
   ]
 }

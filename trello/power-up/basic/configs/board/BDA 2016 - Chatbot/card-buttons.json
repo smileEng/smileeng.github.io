@@ -39,6 +39,19 @@
       "prefix": "☎️ ",
       "pos": "top",
       "lstnu": "In Progress⏰"
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "zIris",
+      "brdu": "558d0f5733f4dd6b8fec7ab6",
+      "mmbn": [
+        "azuraabdlatif",
+        "nicholas80269508"
+      ],
+      "complete": false,
+      "prefix": "☕️️ ☎️ ",
+      "pos": "top",
+      "lstnu": "SPRINT 2.135"
     }
   ]
 }

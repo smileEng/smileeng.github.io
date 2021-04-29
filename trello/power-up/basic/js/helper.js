@@ -95,16 +95,16 @@ const helper = function ({key}) {
         //idBoard
         //idList
         //&name=${name}&due=2019-03-29T14:30:00
-
-        const queryStirng = decodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
-        const url = `${baseUrl}cards/${card}?${queryStirng}`;
+        // const queryStirng = decodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
+        const queryString = encodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
+        const url = `${baseUrl}cards/${card}?${queryString}`;
 
         try {
-            console.log("UPDATE CARD Config URL: " + queryStirng)
+            console.log("UPDATE CARD Config URL: " + queryString)
             const result = await $.ajax({url, type: 'PUT'});
             return 1;
         } catch (e) {
-            console.error("Failed to UPDATE CARD Config URL: " + queryStirng, e)
+            console.error("Failed to UPDATE CARD Config URL: " + queryString, e)
             return 0;
         }
     }

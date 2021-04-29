@@ -115,6 +115,7 @@ const loopCardAction = async function (t, parameters) {
 
 const updateCardStatus = async function (t, {
     prefix: cardTitlePrefix = "",
+    postfix: cardTitlePostfix = "",
     removeText: removeText = null, //text to be removed
     lbld: labelDelete = [],
     lbla: labelAdd = [],
@@ -195,6 +196,12 @@ const updateCardStatus = async function (t, {
     if (cardTitlePrefix) {
         const cardName = await HELPER.card.getName(t, {card});
         const newCardName = `${cardTitlePrefix}${cardName}`
+        cardConfig["name"] = newCardName;
+    }
+
+    if (cardTitlePostfix){
+        const cardName = await HELPER.card.getName(t, {card});
+        const newCardName = `${cardName}${cardTitlePostfix}`
         cardConfig["name"] = newCardName;
     }
 

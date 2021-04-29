@@ -43,7 +43,7 @@ const helper = function ({key}) {
     }
 
 
-    async function getListCards(t, {idList}){
+    async function getListCards(t, {idList}) {
         const url = `${baseUrl}lists/${idList}/cards?${await getAuthQS(t)}`;
         const results = await $.get(url);
         return results;
@@ -96,7 +96,13 @@ const helper = function ({key}) {
         //idList
         //&name=${name}&due=2019-03-29T14:30:00
         // const queryStirng = decodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
-        const queryString = encodeURIComponent($.param({...configs, ...await getAuthQSObject(t),}));
+
+        //Just to ensure the name dont have funny character
+        let encodeConfig = {...configs};
+        if (encodeConfig.name)
+            encodeConfig.name = encodeURIComponent(encodeConfig.name);
+
+        const queryString = decodeURIComponent($.param({...encodeConfig, ...await getAuthQSObject(t),}));
         const url = `${baseUrl}cards/${card}?${queryString}`;
 
         try {
@@ -197,7 +203,7 @@ const helper = function ({key}) {
             getLists: getBoardLists,
             getLabels: getBoardLabels,
         },
-        list:{
+        list: {
             getCards: getListCards
         },
         card: {

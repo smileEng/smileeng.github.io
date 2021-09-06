@@ -14,6 +14,17 @@
     },
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "bOpsProblem",
+      "brdu": "5eb8ee36c5a3663af05445e6",
+      "postfix": "️- ⏰ Pending Ops",
+      "lstnu": "REQUEST LOG",
+      "pos": "bottom",
+      "mmbn": [
+        "vincetcl"
+      ]
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
       "text": "zCompleted",
       "mmbd": true,
       "complete": true,

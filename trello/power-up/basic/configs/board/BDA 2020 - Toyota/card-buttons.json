@@ -4,7 +4,7 @@
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
       "text": "zReviewing",
       "postfix": "️- ⏰ Reviewing",
-      "mmbd": true,
+      "mmbd": false,
       "complete": false,
       "lstnu": "In Progress ⏰",
       "pos": "top"

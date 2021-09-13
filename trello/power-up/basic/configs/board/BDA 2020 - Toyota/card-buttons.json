@@ -1,0 +1,21 @@
+{
+  "card-buttons": [
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "zReviewing",
+      "postfix": "️- ⏰ Reviewing",
+      "mmbd": true,
+      "complete": false,
+      "lstnu": "In Progress ⏰",
+      "pos": "top"
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "zCompleted",
+      "mmbd": true,
+      "complete": true,
+      "pos": "top",
+      "lstnu": "Completed"
+    }
+  ]
+}

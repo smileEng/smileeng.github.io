@@ -11,56 +11,39 @@ var GRAY_ICON = './images/icon-gray.svg';
 
 var boardButtonCallback = function (t) {
     return t.popup({
-        title: 'Popup List Example',
-        items: [
-            {
-                text: 'Open Modal',
-                callback: function (t) {
-                    return t.modal({
-                        url: './modal.html', // The URL to load for the iframe
-                        args: {text: 'Hello'}, // Optional args to access later with t.arg('text') on './modal.html'
-                        accentColor: '#F2D600', // Optional color for the modal header
-                        height: 500, // Initial height for iframe; not used if fullscreen is true
-                        fullscreen: true, // Whether the modal should stretch to take up the whole screen
-                        callback: () => console.log('Goodbye.'), // optional function called if user closes modal (via `X` or escape)
-                        title: 'Hello, Modal!', // Optional title for modal header
-                        // You can add up to 3 action buttons on the modal header - max 1 on the right side.
-                        actions: [{
-                            icon: GRAY_ICON,
-                            url: 'https://google.com', // Opens the URL passed to it.
-                            alt: 'Leftmost',
-                            position: 'left',
-                        }, {
-                            icon: GRAY_ICON,
-                            callback: (tr) => tr.popup({ // Callback to be called when user clicks the action button.
-                                title: 'Settings',
-                                url: 'settings.html',
-                                height: 164,
-                            }),
-                            alt: 'Second from left',
-                            position: 'left',
-                        }, {
-                            icon: GRAY_ICON,
-                            callback: () => console.log('🏎'),
-                            alt: 'Right side',
-                            position: 'right',
-                        }],
-                    })
-                }
-            },
-            {
-                text: 'Open Board Bar',
-                callback: function (t) {
-                    return t.boardBar({
-                        url: './board-bar.html',
-                        height: 200
-                    })
-                        .then(function () {
-                            return t.closePopup();
-                        });
-                }
+        title: 'Popup List Example', items: [{
+            text: 'Open Modal', callback: function (t) {
+                return t.modal({
+                    url: './modal.html', // The URL to load for the iframe
+                    args: {text: 'Hello'}, // Optional args to access later with t.arg('text') on './modal.html'
+                    accentColor: '#F2D600', // Optional color for the modal header
+                    height: 500, // Initial height for iframe; not used if fullscreen is true
+                    fullscreen: true, // Whether the modal should stretch to take up the whole screen
+                    callback: () => console.log('Goodbye.'), // optional function called if user closes modal (via `X` or escape)
+                    title: 'Hello, Modal!', // Optional title for modal header
+                    // You can add up to 3 action buttons on the modal header - max 1 on the right side.
+                    actions: [{
+                        icon: GRAY_ICON, url: 'https://google.com', // Opens the URL passed to it.
+                        alt: 'Leftmost', position: 'left',
+                    }, {
+                        icon: GRAY_ICON, callback: (tr) => tr.popup({ // Callback to be called when user clicks the action button.
+                            title: 'Settings', url: 'settings.html', height: 164,
+                        }), alt: 'Second from left', position: 'left',
+                    }, {
+                        icon: GRAY_ICON, callback: () => console.log('🏎'), alt: 'Right side', position: 'right',
+                    }],
+                })
             }
-        ]
+        }, {
+            text: 'Open Board Bar', callback: function (t) {
+                return t.boardBar({
+                    url: './board-bar.html', height: 200
+                })
+                    .then(function () {
+                        return t.closePopup();
+                    });
+            }
+        }]
     });
 };
 
@@ -132,7 +115,7 @@ const updateCardStatus = async function (t, {
     dateRelative: dueDateRelativeMinutes = 0,
     dayRelative: dueDateRelativeDay = 0,
     isIncludeWeekends = false,
-    time: dueTime = 0,
+    time: dueTime = 0, //special remove or "16:00"
     pos = ""
 
 }) {
@@ -154,8 +137,7 @@ const updateCardStatus = async function (t, {
                 return l.name == listMoveByName
             })
 
-        if (foundList)
-            listMoveByNameId = foundList.id;
+        if (foundList) listMoveByNameId = foundList.id;
     }
 
     let labelNameByIds = [];
@@ -170,8 +152,7 @@ const updateCardStatus = async function (t, {
                 return l.id;
             });
 
-        if (foundLabels)
-            labelNameByIds = foundLabels;
+        if (foundLabels) labelNameByIds = foundLabels;
     }
 
 
@@ -186,8 +167,7 @@ const updateCardStatus = async function (t, {
                 return l.id;
             });
 
-        if (foundMembers)
-            memberUsernamesById = foundMembers;
+        if (foundMembers) memberUsernamesById = foundMembers;
     }
 
     //Building the card config
@@ -199,7 +179,7 @@ const updateCardStatus = async function (t, {
         cardConfig["name"] = newCardName;
     }
 
-    if (cardTitlePostfix){
+    if (cardTitlePostfix) {
         const cardName = await HELPER.card.getName(t, {card});
         const newCardName = `${cardName}${cardTitlePostfix}`
         cardConfig["name"] = newCardName;
@@ -211,18 +191,14 @@ const updateCardStatus = async function (t, {
         cardConfig["name"] = newCardName;
     }
 
-    if (listMoveByNameId || listMove)
-        cardConfig["idList"] = listMoveByNameId || listMove;
+    if (listMoveByNameId || listMove) cardConfig["idList"] = listMoveByNameId || listMove;
 
-    if (boardMove)
-        cardConfig["idBoard"] = boardMove;
+    if (boardMove) cardConfig["idBoard"] = boardMove;
 
-    if (pos)
-        cardConfig["pos"] = pos;
+    if (pos) cardConfig["pos"] = pos;
 
     //Card Config due date computations [minute, day, and time fix setter]
-    if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0)
-        cardConfig["due"] = moment().add("minutes", dueDateRelativeMinutes).toISOString();
+    if (dueDateRelativeMinutes && dueDateRelativeMinutes !== 0) cardConfig["due"] = moment().add("minutes", dueDateRelativeMinutes).toISOString();
 
     if (dueDateRelativeDay && dueDateRelativeDay !== 0) {
         const dueConfig = cardConfig["due"] ? moment(cardConfig["due"]) : moment();
@@ -234,29 +210,23 @@ const updateCardStatus = async function (t, {
     }
 
     if (dueTime && dueTime !== 0) {
-        const [hour, minute] = dueTime.split(":")
-        const dueConfig = cardConfig["due"] ? moment(cardConfig["due"]) : moment();
-        dueConfig.set({hour: parseInt(hour), minute: parseInt(minute)})
-        cardConfig["due"] = dueConfig.toISOString();
+        if (dueTime == "remove") {
+            cardConfig["due"] = null;
+        } else {
+            const [hour, minute] = dueTime.split(":")
+            const dueConfig = cardConfig["due"] ? moment(cardConfig["due"]) : moment();
+            dueConfig.set({hour: parseInt(hour), minute: parseInt(minute)})
+            cardConfig["due"] = dueConfig.toISOString();
+        }
     }
 
-    if (labelNameByIds.length > 0 || labels.length > 0)
-        cardConfig["idLabels"] =
-            labelNameByIds.length > 0
-                ? labelNameByIds.join()
-                : labels.join()
+    if (labelNameByIds.length > 0 || labels.length > 0) cardConfig["idLabels"] = labelNameByIds.length > 0 ? labelNameByIds.join() : labels.join()
 
-    if (isArchive)
-        cardConfig["closed"] = true
+    if (isArchive) cardConfig["closed"] = true
 
-    if (memberDeleteAll)
-        cardConfig["idMembers"] = "";
+    if (memberDeleteAll) cardConfig["idMembers"] = "";
 
-    if (memberUsernamesById.length > 0 || members.length > 0)
-        cardConfig["idMembers"] =
-            memberUsernamesById.length > 0
-                ? memberUsernamesById.join()
-                : members.join();
+    if (memberUsernamesById.length > 0 || members.length > 0) cardConfig["idMembers"] = memberUsernamesById.length > 0 ? memberUsernamesById.join() : members.join();
 
 
     cardConfig["dueComplete"] = isComplete
@@ -272,8 +242,7 @@ function addBusinessDays(momentDate, days) {
     let remaining = days % 5;
     while (remaining) {
         d.add(1, 'd');
-        if (d.day() !== 0 && d.day() !== 6)
-            remaining--;
+        if (d.day() !== 0 && d.day() !== 6) remaining--;
     }
     return d;
 };
@@ -292,9 +261,7 @@ TrelloPowerUp.initialize({
                 return cardButtonConfig["card-buttons"]
                     .map(function ({icon, text, ...parameters}) {
                         return {
-                            icon,
-                            text,
-                            callback: function (t) {
+                            icon, text, callback: function (t) {
                                 return updateCardStatus(t, parameters)
                             }
                         };
@@ -304,18 +271,14 @@ TrelloPowerUp.initialize({
                 console.error("An error has occured while trying to load json");
                 return [];
             });
-    },
-    'show-settings': function (t, options) {
+    }, 'show-settings': function (t, options) {
         // when a user clicks the gear icon by your Power-Up in the Power-Ups menu
         // what should Trello show. We highly recommend the popup in this case as
         // it is the least disruptive, and fits in well with the rest of Trello's UX
         return t.popup({
-            title: 'Settings',
-            url: './settings.html',
-            height: 184 // we can always resize later, but if we know the size in advance, its good to tell Trello
+            title: 'Settings', url: './settings.html', height: 184 // we can always resize later, but if we know the size in advance, its good to tell Trello
         });
-    },
-    /*
+    }, /*
         🔑 Authorization Capabiltiies 🗝
         The following two capabilities should be used together to determine:
         1. whether a user is appropriately authorized
@@ -338,8 +301,7 @@ TrelloPowerUp.initialize({
                 return {authorized: false};
             });
         // You can also return the object synchronously if you know the answer synchronously.
-    },
-    'show-authorization': function (t, options) {
+    }, 'show-authorization': function (t, options) {
         // Returns what to do when a user clicks the 'Authorize Account' link from the Power-Up gear icon
         // which shows when 'authorization-status' returns { authorized: false }.
 
@@ -352,16 +314,14 @@ TrelloPowerUp.initialize({
         // In this case we'll open a popup to kick off the authorization flow.
         if (trelloAPIKey) {
             return t.popup({
-                title: 'My Auth Popup',
-                args: {apiKey: trelloAPIKey}, // Pass in API key to the iframe
+                title: 'My Auth Popup', args: {apiKey: trelloAPIKey}, // Pass in API key to the iframe
                 url: './authorize.html', // Check out public/authorize.html to see how to ask a user to auth
                 height: 140,
             });
         } else {
             console.log("🙈 Looks like you need to add your API key to the project!");
         }
-    },
-    'board-buttons': function (t, options) {
+    }, 'board-buttons': function (t, options) {
         return t
             .get('board', 'private', 'jsonUrl')
             .then(function (jsonUrl) {
@@ -372,9 +332,7 @@ TrelloPowerUp.initialize({
                 return cardButtonConfig["board-buttons"]
                     .map(function ({icon, text, ...parameters}) {
                         return {
-                            icon,
-                            text,
-                            callback: function (t) {
+                            icon, text, callback: function (t) {
                                 return processAction(t, parameters)
                             }
                         };
@@ -398,8 +356,7 @@ TrelloPowerUp.initialize({
         // }];
     },
 }, {
-    appKey: '9ed85a487eb0b08bff2f11e84cc80c16',
-    appName: 'My own power up'
+    appKey: '9ed85a487eb0b08bff2f11e84cc80c16', appName: 'My own power up'
 });
 
 console.log('Loaded by: ' + document.referrer);
@@ -413,9 +370,7 @@ var a = {
     member: "534a0cf75530fa95323f352c",
     organization: "57bfc6c1bdb36fdccf5c3476",
     permissions: {
-        board: "write",
-        card: "write",
-        organization: "write",
+        board: "write", card: "write", organization: "write",
     },
     version: "build-2906",
 }

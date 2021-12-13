@@ -5,9 +5,10 @@
       "text": "aTesting",
       "postfix": "️- ⏰ Testing",
       "mmbd": true,
-      "complete": true,
-      "lstnu": "Reviewing ⏰",
-      "pos": "top",
+      "complete": false,
+      "lstnu": "In Progress ⏰",
+      "time": "remove",
+      "pos": "bottom",
       "mmbn": [
         "scarlettchan77"
       ]

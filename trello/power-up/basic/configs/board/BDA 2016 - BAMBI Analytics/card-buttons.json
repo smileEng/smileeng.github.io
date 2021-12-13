@@ -2,7 +2,7 @@
   "card-buttons": [
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
-      "text": "aTesting",
+      "text": "a1Testing",
       "postfix": "️- ⏰ Testing",
       "mmbd": true,
       "complete": false,
@@ -15,24 +15,16 @@
     },
     {
       "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
-      "text": "bOpsProblem",
-      "brdu": "5eb8ee36c5a3663af05445e6",
-      "prefix": " 🦉🦋 ",
-      "postfix": "️- ⏰ Pending Ops",
-      "lstnu": "REQUEST LOG",
+      "text": "a2Details",
+      "postfix": "️- ⏰ Pending Details",
+      "mmbd": true,
+      "complete": false,
+      "lstnu": "To Do",
+      "time": "remove",
       "pos": "bottom",
       "mmbn": [
-        "vincetcl",
         "scarlettchan77"
       ]
-    },
-    {
-      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
-      "text": "zCompleted",
-      "mmbd": true,
-      "complete": true,
-      "pos": "top",
-      "lstnu": "Completed"
     }
   ]
 }

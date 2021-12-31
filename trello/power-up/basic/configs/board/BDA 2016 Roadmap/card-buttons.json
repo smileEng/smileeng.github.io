@@ -6,7 +6,7 @@
       "postfix": "️- ⏰ Testing",
       "mmbd": true,
       "complete": false,
-      "lstnu": "In Progress ⏰",
+      "lstnu": "Pending QA Testing",
       "time": "remove",
       "pos": "bottom",
       "mmbn": [
@@ -19,7 +19,7 @@
       "postfix": "️- ⏰ Pending Details",
       "mmbd": true,
       "complete": false,
-      "lstnu": "To Do",
+      "lstnu": "In Progress ⏰",
       "time": "remove",
       "pos": "bottom",
       "mmbn": [

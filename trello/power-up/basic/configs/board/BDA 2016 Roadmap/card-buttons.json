@@ -1,0 +1,42 @@
+{
+  "card-buttons": [
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "a1Testing",
+      "postfix": "️- ⏰ Testing",
+      "mmbd": true,
+      "complete": false,
+      "lstnu": "In Progress ⏰",
+      "time": "remove",
+      "pos": "bottom",
+      "mmbn": [
+        "scarlettchan77"
+      ]
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "a2Details",
+      "postfix": "️- ⏰ Pending Details",
+      "mmbd": true,
+      "complete": false,
+      "lstnu": "To Do",
+      "time": "remove",
+      "pos": "bottom",
+      "mmbn": [
+        "scarlettchan77"
+      ]
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "a3Reject",
+      "postfix": "️- ⏰ CR",
+      "mmbd": false,
+      "complete": false,
+      "lstnu": "In Progress ⏰",
+      "pos": "top",
+      "mmbn": [
+        "tarn45"
+      ]
+    }
+  ]
+}

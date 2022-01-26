@@ -37,6 +37,19 @@
       "mmbn": [
         "tarn45"
       ]
+    },
+    {
+      "icon": "https://app.butlerfortrello.com/master-106/assets/fa-5.1.1/icons/grey/calendar-check-o.svg?color=798d99",
+      "text": "a4OPS",
+      "postfix": "️- ⏰ OPS AND DETAILS? Maybe its Configuration?",
+      "mmbd": false,
+      "complete": false,
+      "lstnu": "In Progress ⏰",
+      "pos": "top",
+      "mmbn": [
+        "scarlettchan77",
+        "chiehwoeiteh"
+      ]
     }
   ]
 }
